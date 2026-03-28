@@ -1,16 +1,19 @@
 import { useEffect, useRef, useState } from 'react';
 
+import type { ScenarioSession } from '../../domain/types';
 import { db, type ThirdOfficerDatabase } from '../../lib/db/client';
 import { completeExecutionItem, markExecutionItemBlocked, rescheduleExecutionItem, skipExecutionItem } from '../tasks/taskActions';
 import { TaskCard } from '../tasks/TaskCard';
 import { TaskDetailSheet } from '../tasks/TaskDetailSheet';
 import { loadHomeData, loadTaskDetail, type TaskDetailData, type TaskView } from '../tasks/taskData';
 import { resolveNow, type NowValue } from '../tasks/time';
+import { startScenarioSession } from '../scenarios/scenarioSessionData';
 
 type HomePageProps = {
   database?: ThirdOfficerDatabase;
   now?: NowValue;
   initialSelectedDate?: string;
+  onScenarioStarted?: (sessionId: string) => void | Promise<void>;
 };
 
 function PageSection(props: { title: string; children: React.ReactNode }) {
@@ -28,7 +31,7 @@ function EmptyState({ label }: { label: string }) {
   return <p className="tactical-empty">{label}</p>;
 }
 
-export function HomePage({ database = db, now, initialSelectedDate }: HomePageProps) {
+export function HomePage({ database = db, now, initialSelectedDate, onScenarioStarted }: HomePageProps) {
   const [selectedDate, setSelectedDate] = useState((initialSelectedDate ?? resolveNow(now)).slice(0, 10));
   const [data, setData] = useState<Awaited<ReturnType<typeof loadHomeData>> | null>(null);
   const [activeView, setActiveView] = useState<TaskView | null>(null);
@@ -123,6 +126,17 @@ export function HomePage({ database = db, now, initialSelectedDate }: HomePagePr
     setActiveDetail(null);
   }
 
+  async function handleStartScenario(scenario: ScenarioSession['scenario']) {
+    const session = await startScenarioSession(database, scenario, resolveNow(now));
+
+    if (onScenarioStarted) {
+      await onScenarioStarted(session.id);
+      return;
+    }
+
+    await refresh();
+  }
+
   return (
     <div className="tactical-page">
       <section className="tactical-panel-strong">
@@ -154,18 +168,18 @@ export function HomePage({ database = db, now, initialSelectedDate }: HomePagePr
         </div>
 
         <div className="mt-5 grid grid-cols-2 gap-2">
-          <a href="/scenarios" className="tactical-button-primary flex items-center justify-center">
+          <button type="button" onClick={() => void handleStartScenario('arrival')} className="tactical-button-primary flex items-center justify-center">
             Arrival
-          </a>
-          <a href="/scenarios" className="tactical-button-secondary flex items-center justify-center">
+          </button>
+          <button type="button" onClick={() => void handleStartScenario('departure')} className="tactical-button-secondary flex items-center justify-center">
             Departure
-          </a>
-          <a href="/scenarios" className="tactical-button-ghost flex items-center justify-center">
+          </button>
+          <button type="button" onClick={() => void handleStartScenario('anchoring')} className="tactical-button-ghost flex items-center justify-center">
             Anchoring
-          </a>
-          <a href="/scenarios" className="tactical-button-ghost flex items-center justify-center">
+          </button>
+          <button type="button" onClick={() => void handleStartScenario('in-port-watch')} className="tactical-button-ghost flex items-center justify-center">
             In-Port Watch
-          </a>
+          </button>
         </div>
 
         <div className="mt-4 tactical-inline-links">

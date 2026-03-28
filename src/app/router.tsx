@@ -1,4 +1,4 @@
-import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter, useNavigate } from 'react-router-dom';
 
 import { AppLayout } from './App';
 import { DocumentsPage } from '../features/documents/DocumentsPage';
@@ -10,6 +10,12 @@ import { ScenarioSessionPage } from '../features/scenarios/ScenarioSessionPage';
 import { ScenariosPage } from '../features/scenarios/ScenariosPage';
 import { SettingsPage } from '../features/settings/SettingsPage';
 
+function HomeRoute() {
+  const navigate = useNavigate();
+
+  return <HomePage onScenarioStarted={(sessionId) => navigate(`/scenarios/${sessionId}`)} />;
+}
+
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -17,7 +23,7 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <HomePage />,
+        element: <HomeRoute />,
       },
       {
         path: 'routine',

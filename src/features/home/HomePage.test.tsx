@@ -94,4 +94,29 @@ describe('HomePage', () => {
     view.unmount();
     await database.delete();
   });
+
+  it('starts an anchoring scenario session from the home quick action', async () => {
+    const database = createTestDatabase('home-page-start-scenario');
+    await bootstrapDatabase(database);
+
+    const view = render(
+      <HomePage
+        database={database}
+        now="2026-04-01T08:30:00.000Z"
+        initialSelectedDate="2026-04-01T08:30:00.000Z"
+      />,
+    );
+
+    fireEvent.click(screen.getByRole('button', { name: /anchoring/i }));
+
+    await waitFor(async () => {
+      const sessions = await database.scenarioSessions.toArray();
+      expect(sessions).toHaveLength(1);
+      expect(sessions[0]?.scenario).toBe('anchoring');
+      expect(sessions[0]?.status).toBe('active');
+    });
+
+    view.unmount();
+    await database.delete();
+  });
 });
