@@ -4,13 +4,13 @@ import { router } from './router';
 import { AppProviders } from './providers';
 
 const navItems = [
-  { to: '/', label: 'Home' },
-  { to: '/routine', label: 'Routine' },
-  { to: '/scenarios', label: 'Scenarios' },
-  { to: '/calendar', label: 'Calendar' },
-  { to: '/documents', label: 'Documents' },
-  { to: '/notes', label: 'Notes' },
-  { to: '/settings', label: 'Settings' },
+  { to: '/', code: 'CTL', label: 'Home' },
+  { to: '/routine', code: 'RUN', label: 'Routine' },
+  { to: '/scenarios', code: 'MOD', label: 'Scenarios' },
+  { to: '/calendar', code: 'CAL', label: 'Calendar' },
+  { to: '/documents', code: 'DOC', label: 'Documents' },
+  { to: '/notes', code: 'LOG', label: 'Notes' },
+  { to: '/settings', code: 'CFG', label: 'Settings' },
 ];
 
 export function AppLayout() {
@@ -57,7 +57,10 @@ export function AppLayout() {
                 ].join(' ')
               }
             >
-              {item.label}
+              <span className="flex flex-col items-center gap-1">
+                <span className="text-[9px] tracking-[0.22em] opacity-80">{item.code}</span>
+                <span>{item.label}</span>
+              </span>
             </NavLink>
           ))}
         </nav>

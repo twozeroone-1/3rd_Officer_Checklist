@@ -34,6 +34,20 @@ export function SettingsPage({ database = db }: SettingsPageProps) {
         <p className="support-kicker">Settings</p>
         <h2 className="support-title">Device and offline controls</h2>
         <p className="support-copy">Keep this page calmer than the operational screens while still matching the tactical palette and typography.</p>
+        <div className="mt-4 support-stat-grid">
+          <div className="support-stat">
+            <p className="support-stat-label">Theme</p>
+            <p className="support-stat-value">{themeLabels[theme]}</p>
+          </div>
+          <div className="support-stat">
+            <p className="support-stat-label">Backup</p>
+            <p className="support-stat-value">Ready</p>
+          </div>
+          <div className="support-stat">
+            <p className="support-stat-label">Mode</p>
+            <p className="support-stat-value">Offline</p>
+          </div>
+        </div>
       </section>
 
       <section className="support-panel space-y-3">

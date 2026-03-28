@@ -135,6 +135,20 @@ export function CalendarPage({ database = db, now }: CalendarPageProps) {
             <p className="tactical-meta-value">{selectedDate}</p>
           </div>
         </div>
+        <div className="mt-4 tactical-stat-grid">
+          <div className="tactical-stat">
+            <p className="tactical-stat-label">Routine</p>
+            <p className="tactical-stat-value">{data?.routineViews.length ?? 0}</p>
+          </div>
+          <div className="tactical-stat">
+            <p className="tactical-stat-label">Scenario</p>
+            <p className="tactical-stat-value">{data?.scenarioViews.length ?? 0}</p>
+          </div>
+          <div className="tactical-stat">
+            <p className="tactical-stat-label">Carry</p>
+            <p className="tactical-stat-value">{data?.carryOverViews.length ?? 0}</p>
+          </div>
+        </div>
         <label className="tactical-meta mt-5 block" htmlFor="calendar-date-picker">
           Selected workload date
         </label>

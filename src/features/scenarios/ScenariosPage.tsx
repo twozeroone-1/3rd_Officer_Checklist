@@ -54,6 +54,7 @@ export function ScenariosPage({ database = db, now }: ScenariosPageProps) {
   }
 
   const activeSessions = sessions.filter((session) => session.status === 'active');
+  const completedSessions = sessions.filter((session) => session.status === 'completed');
 
   return (
     <div className="tactical-page">
@@ -61,6 +62,20 @@ export function ScenariosPage({ database = db, now }: ScenariosPageProps) {
         <p className="tactical-kicker">Scenarios</p>
         <h2 className="tactical-title">Guided bridge modes</h2>
         <p className="tactical-copy">Start a focused session for arrival, departure, anchoring, or in-port watch work.</p>
+        <div className="mt-4 tactical-stat-grid">
+          <div className="tactical-stat">
+            <p className="tactical-stat-label">Available</p>
+            <p className="tactical-stat-value">{scenarioCatalog.length}</p>
+          </div>
+          <div className="tactical-stat">
+            <p className="tactical-stat-label">Active</p>
+            <p className="tactical-stat-value">{activeSessions.length}</p>
+          </div>
+          <div className="tactical-stat">
+            <p className="tactical-stat-label">Closed</p>
+            <p className="tactical-stat-value">{completedSessions.length}</p>
+          </div>
+        </div>
       </section>
 
       <section className="tactical-list-section">
@@ -68,6 +83,10 @@ export function ScenariosPage({ database = db, now }: ScenariosPageProps) {
           <article key={scenario.type} className="tactical-panel border-l-2 border-[color:var(--accent-primary)]">
             <p className="tactical-kicker">{scenario.title}</p>
             <p className="mt-3 text-sm leading-6 text-[color:var(--text-secondary)]">{scenario.summary}</p>
+            <div className="mt-3 grid gap-2 text-[11px] uppercase tracking-[0.16em] text-[color:var(--text-faint)] sm:grid-cols-2">
+              <div className="border-l-2 border-[color:var(--surface-highest)] pl-3">Context {scenario.contexts.join(' / ')}</div>
+              <div className="border-l-2 border-[color:var(--surface-highest)] pl-3">Ref {scenario.traceability[0]?.documentId}</div>
+            </div>
             <button
               type="button"
               onClick={() => void handleStart(scenario.type)}

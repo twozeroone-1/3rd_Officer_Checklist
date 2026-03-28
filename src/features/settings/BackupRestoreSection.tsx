@@ -23,6 +23,7 @@ async function readFileText(file: File) {
 
 export function BackupRestoreSection({ database = db }: BackupRestoreSectionProps) {
   const [status, setStatus] = useState('');
+  const isError = status.toLowerCase().startsWith('unable');
 
   async function handleExport() {
     try {
@@ -77,7 +78,19 @@ export function BackupRestoreSection({ database = db }: BackupRestoreSectionProp
         <span className="font-black uppercase tracking-[0.12em] text-[color:var(--text-primary)]">Import backup JSON</span>
         <input aria-label="Import backup JSON" type="file" accept="application/json" onChange={(event) => void handleImport(event)} className="mt-3 block w-full text-sm text-[color:var(--text-primary)]" />
       </label>
-      {status ? <p role="status" className="border border-[color:var(--outline-soft)] bg-[color:var(--surface-lowest)] px-4 py-3 text-sm text-[color:var(--text-secondary)]">{status}</p> : null}
+      {status ? (
+        <p
+          role="status"
+          className={[
+            'border px-4 py-3 text-sm',
+            isError
+              ? 'border-[color:rgba(255,180,171,0.24)] bg-[color:rgba(147,0,10,0.26)] text-[color:var(--danger)]'
+              : 'border-[color:rgba(70,234,237,0.24)] bg-[color:rgba(70,234,237,0.12)] text-[color:var(--accent-secondary)]',
+          ].join(' ')}
+        >
+          {status}
+        </p>
+      ) : null}
     </section>
   );
 }

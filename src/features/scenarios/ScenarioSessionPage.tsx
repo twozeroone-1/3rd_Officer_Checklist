@@ -127,6 +127,11 @@ export function ScenarioSessionPage({ database = db, now, sessionId: sessionIdPr
     );
   }
 
+  const completedCount = data.views.filter((view) => view.item.status === 'done').length;
+  const blockedCount = data.views.filter((view) => view.item.status === 'blocked').length;
+  const openCount = data.views.length - completedCount - blockedCount;
+  const blockedViews = data.views.filter((view) => view.item.status === 'blocked');
+
   return (
     <div className="tactical-page">
       <section className="tactical-panel-strong">
@@ -139,6 +144,20 @@ export function ScenarioSessionPage({ database = db, now, sessionId: sessionIdPr
           <div className="text-right">
             <p className="tactical-meta">Generated tasks</p>
             <p className="tactical-meta-value">{data.views.length}</p>
+          </div>
+        </div>
+        <div className="mt-4 tactical-stat-grid">
+          <div className="tactical-stat">
+            <p className="tactical-stat-label">Open</p>
+            <p className="tactical-stat-value">{openCount}</p>
+          </div>
+          <div className="tactical-stat">
+            <p className="tactical-stat-label">Done</p>
+            <p className="tactical-stat-value">{completedCount}</p>
+          </div>
+          <div className="tactical-stat">
+            <p className="tactical-stat-label">Blocked</p>
+            <p className="tactical-stat-value">{blockedCount}</p>
           </div>
         </div>
         <label className="tactical-meta mt-5 block" htmlFor="scenario-date-picker">
@@ -159,6 +178,22 @@ export function ScenarioSessionPage({ database = db, now, sessionId: sessionIdPr
           Complete and close session
         </button>
       </section>
+
+      {blockedViews.length ? (
+        <section className="tactical-panel border-l-4 border-[color:var(--danger)]">
+          <p className="tactical-kicker" style={{ color: 'var(--danger)' }}>
+            High-risk unresolved
+          </p>
+          <div className="mt-3 space-y-3">
+            {blockedViews.map((view) => (
+              <article key={view.item.id} className="border border-[color:rgba(255,180,171,0.22)] bg-[color:rgba(147,0,10,0.28)] px-3 py-3">
+                <p className="text-sm font-black uppercase tracking-tight text-[color:var(--text-primary)]">{view.item.title}</p>
+                {view.item.note ? <p className="mt-2 text-sm leading-6 text-[color:var(--danger)]">{view.item.note}</p> : null}
+              </article>
+            ))}
+          </div>
+        </section>
+      ) : null}
 
       <section className="tactical-list-section">
         <h3 className="tactical-list-title">Generated session work</h3>

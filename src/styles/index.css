@@ -182,8 +182,20 @@ button {
   gap: 0.75rem;
 }
 
+.support-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
 .tactical-stat {
   border-left: 2px solid var(--accent-primary);
+  background: var(--surface-lowest);
+  padding: 0.75rem;
+}
+
+.support-stat {
+  border-left: 2px solid var(--surface-highest);
   background: var(--surface-lowest);
   padding: 0.75rem;
 }
@@ -202,6 +214,22 @@ button {
   font-size: 1.35rem;
   font-weight: 900;
   letter-spacing: -0.05em;
+}
+
+.support-stat-label {
+  color: var(--text-faint);
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.support-stat-value {
+  margin-top: 0.45rem;
+  color: var(--text-primary);
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
 }
 
 .tactical-input,
@@ -271,6 +299,27 @@ button {
   transform: scale(0.98);
 }
 
+.tactical-inline-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tactical-inline-link {
+  border: 1px solid var(--outline-soft);
+  background: var(--surface-lowest);
+  color: var(--text-secondary);
+  padding: 0.7rem 0.8rem;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.tactical-inline-link strong {
+  color: var(--text-primary);
+}
+
 .tactical-empty {
   border: 1px dashed var(--outline-soft);
   background: var(--surface-lowest);
@@ -297,4 +346,11 @@ button {
   color: var(--text-primary);
   font-size: 1rem;
   font-weight: 800;
+}
+
+@media (max-width: 420px) {
+  .tactical-stat-grid,
+  .support-stat-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }

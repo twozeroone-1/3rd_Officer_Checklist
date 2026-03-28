@@ -168,6 +168,18 @@ export function HomePage({ database = db, now, initialSelectedDate }: HomePagePr
           </a>
         </div>
 
+        <div className="mt-4 tactical-inline-links">
+          <a href="/documents" aria-label="Open reference library" className="tactical-inline-link">
+            <strong>Docs</strong> quick reference
+          </a>
+          <a href="/notes" aria-label="Open handover log" className="tactical-inline-link">
+            <strong>Notes</strong> handover log
+          </a>
+          <a href="/settings" aria-label="Open offline control" className="tactical-inline-link">
+            <strong>Settings</strong> offline control
+          </a>
+        </div>
+
         <div className="mt-5">
           <label className="tactical-meta" htmlFor="home-date-picker">
             Selected date
@@ -197,9 +209,12 @@ export function HomePage({ database = db, now, initialSelectedDate }: HomePagePr
       <PageSection title="Recent completions">
         {data?.recentCompletions.length ? (
           data.recentCompletions.map(({ log, item }) => (
-            <article key={log.id} className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-slate-200">
-              <p className="font-medium text-white">{item?.title ?? log.executionItemId}</p>
-              <p className="mt-1 text-slate-400">Completed at {log.recordedAt.replace('T', ' ').slice(0, 16)} UTC</p>
+            <article key={log.id} className="support-panel border-l-2 border-[color:var(--accent-secondary)] text-sm text-[color:var(--text-secondary)]">
+              <p className="support-kicker">Completion log</p>
+              <p className="mt-2 text-base font-black uppercase tracking-tight text-[color:var(--text-primary)]">{item?.title ?? log.executionItemId}</p>
+              <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.16em] text-[color:var(--accent-secondary)]">
+                Completed {log.recordedAt.replace('T', ' ').slice(0, 16)} UTC
+              </p>
             </article>
           ))
         ) : (

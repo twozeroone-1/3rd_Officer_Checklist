@@ -21,6 +21,20 @@ export function DocumentsPage({ database = db }: DocumentsPageProps) {
         <p className="support-kicker">Documents</p>
         <h2 className="support-title">Manual helper</h2>
         <p className="support-copy">Search reference text by document code, keyword, or excerpt content without leaving the offline workflow.</p>
+        <div className="mt-4 support-stat-grid">
+          <div className="support-stat">
+            <p className="support-stat-label">Matches</p>
+            <p className="support-stat-value">{results.length}</p>
+          </div>
+          <div className="support-stat">
+            <p className="support-stat-label">Query</p>
+            <p className="support-stat-value">{query ? 'Live' : 'All'}</p>
+          </div>
+          <div className="support-stat">
+            <p className="support-stat-label">Mode</p>
+            <p className="support-stat-value">Offline</p>
+          </div>
+        </div>
         <input
           type="search"
           value={query}
