@@ -1,0 +1,34 @@
+{
+  "id": "fleet-15",
+  "code": "FLEET-15",
+  "title": "Ship Arrival and Departure",
+  "revision": "2025.1",
+  "summary": "Arrival and departure coordination for bridge team readiness, pilot exchange, and mooring preparation.",
+  "source": "Curated company manual excerpts",
+  "excerpts": [
+    {
+      "id": "fleet-15-arrival-brief",
+      "heading": "Arrival bridge preparation",
+      "summary": "Confirm pilot station, tugs, mooring stations, and bridge briefing before arrival.",
+      "body": "Before arrival, confirm pilot ladder readiness, tug plan, mooring station readiness, and brief the bridge team on roles, speeds, and communication channels.",
+      "tags": ["arrival", "briefing", "bridge-team"],
+      "traceability": {
+        "documentId": "fleet-15",
+        "excerptId": "fleet-15-arrival-brief",
+        "sectionRef": "2.5"
+      }
+    },
+    {
+      "id": "fleet-15-departure-brief",
+      "heading": "Departure bridge preparation",
+      "summary": "Verify departure passage, engine readiness, and line handling coordination before letting go.",
+      "body": "Before departure, review the departure passage, engine and steering readiness, tug instructions, line handling sequence, and contingency actions with the bridge team.",
+      "tags": ["departure", "briefing", "bridge-team"],
+      "traceability": {
+        "documentId": "fleet-15",
+        "excerptId": "fleet-15-departure-brief",
+        "sectionRef": "3.1"
+      }
+    }
+  ]
+}

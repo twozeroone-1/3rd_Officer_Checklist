@@ -1,0 +1,34 @@
+{
+  "id": "fleet-12",
+  "code": "FLEET-12",
+  "title": "Navigation at Sea",
+  "revision": "2025.1",
+  "summary": "Bridge watchkeeping guidance for sea passage planning, handover discipline, and equipment readiness.",
+  "source": "Curated company manual excerpts",
+  "excerpts": [
+    {
+      "id": "fleet-12-watch-handover",
+      "heading": "Watch handover preparation",
+      "summary": "Review standing orders, traffic, weather, and defects before taking over the watch.",
+      "body": "Before watch handover, verify the passage plan status, master's night orders, traffic picture, weather development, and any defects affecting safe navigation.",
+      "tags": ["watch", "handover", "sea"],
+      "traceability": {
+        "documentId": "fleet-12",
+        "excerptId": "fleet-12-watch-handover",
+        "sectionRef": "4.1"
+      }
+    },
+    {
+      "id": "fleet-12-nav-equipment-check",
+      "heading": "Navigational equipment checks",
+      "summary": "Confirm radar, gyro, echo sounder, AIS, and BNWAS availability at the start of the watch.",
+      "body": "At the beginning of the watch, confirm all required navigation equipment is operational and that any limitation is recorded and escalated.",
+      "tags": ["watch", "equipment", "safety"],
+      "traceability": {
+        "documentId": "fleet-12",
+        "excerptId": "fleet-12-nav-equipment-check",
+        "sectionRef": "4.4"
+      }
+    }
+  ]
+}

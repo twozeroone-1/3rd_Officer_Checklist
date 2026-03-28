@@ -1,0 +1,34 @@
+{
+  "id": "fleet-13",
+  "code": "FLEET-13",
+  "title": "In-Port Watchkeeping Operation",
+  "revision": "2025.1",
+  "summary": "Cargo, gangway, security, and mooring surveillance guidance for port operations.",
+  "source": "Curated company manual excerpts",
+  "excerpts": [
+    {
+      "id": "fleet-13-in-port-round",
+      "heading": "In-port watch rounds",
+      "summary": "Check moorings, gangway safety, draft, security, and pollution prevention measures during each round.",
+      "body": "The in-port watch shall inspect mooring tension, gangway condition, security posture, draft marks, and any signs of pollution or unsafe cargo operation.",
+      "tags": ["port", "watch", "rounds"],
+      "traceability": {
+        "documentId": "fleet-13",
+        "excerptId": "fleet-13-in-port-round",
+        "sectionRef": "3.3"
+      }
+    },
+    {
+      "id": "fleet-13-gangway-security",
+      "heading": "Gangway and visitor control",
+      "summary": "Keep gangway watch records, verify lighting, and control visitors alongside.",
+      "body": "Maintain gangway watch records, verify safe access and lighting, and ensure all visitors and shore personnel follow security control measures.",
+      "tags": ["security", "gangway", "port"],
+      "traceability": {
+        "documentId": "fleet-13",
+        "excerptId": "fleet-13-gangway-security",
+        "sectionRef": "4.2"
+      }
+    }
+  ]
+}

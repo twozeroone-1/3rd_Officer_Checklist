@@ -1,0 +1,90 @@
+import { RoutineTaskTemplateSchema } from '../../domain/schema';
+import type { RoutineTaskTemplate } from '../../domain/types';
+
+export const routineTemplates: RoutineTaskTemplate[] = [
+  {
+    id: 'watch-handover-prep',
+    title: 'Prepare for watch handover',
+    category: 'routine',
+    summary: 'Review standing orders, traffic picture, weather, and defects before taking over the bridge watch.',
+    frequency: 'watch',
+    contexts: ['sea'],
+    conditionTriggers: ['before-watch'],
+    responsibility: 'third-officer',
+    status: 'active',
+    traceability: [
+      { documentId: 'fleet-12', excerptId: 'fleet-12-watch-handover', sectionRef: '4.1' },
+    ],
+  },
+  {
+    id: 'navigational-equipment-checks',
+    title: 'Check navigational equipment readiness',
+    category: 'routine',
+    summary: 'Verify key bridge equipment is available and any limitation is logged before the watch settles.',
+    frequency: 'watch',
+    contexts: ['sea'],
+    conditionTriggers: ['during-watch'],
+    responsibility: 'third-officer',
+    status: 'active',
+    traceability: [
+      { documentId: 'fleet-12', excerptId: 'fleet-12-nav-equipment-check', sectionRef: '4.4' },
+    ],
+  },
+  {
+    id: 'anchor-position-hourly-check',
+    title: 'Record hourly anchor position check',
+    category: 'routine',
+    summary: 'Confirm vessel position, cable lead, and dragging indicators every hour at anchor.',
+    frequency: 'conditional',
+    contexts: ['anchoring'],
+    conditionTriggers: ['hourly-anchor'],
+    responsibility: 'third-officer',
+    status: 'active',
+    traceability: [
+      { documentId: 'fleet-i21', excerptId: 'fleet-i21-anchor-hourly-check', sectionRef: '4.4' },
+    ],
+  },
+  {
+    id: 'in-port-watch-round',
+    title: 'Complete in-port watch round',
+    category: 'routine',
+    summary: 'Inspect moorings, gangway, pollution risks, and security controls during the port watch.',
+    frequency: 'watch',
+    contexts: ['in-port'],
+    conditionTriggers: ['during-watch'],
+    responsibility: 'third-officer',
+    status: 'active',
+    traceability: [
+      { documentId: 'fleet-13', excerptId: 'fleet-13-in-port-round', sectionRef: '3.3' },
+      { documentId: 'fleet-13', excerptId: 'fleet-13-gangway-security', sectionRef: '4.2' },
+    ],
+  },
+  {
+    id: 'lsa-ffa-weekly-check',
+    title: 'Perform weekly LSA and FFA check',
+    category: 'routine',
+    summary: 'Inspect emergency lighting, fire stations, lifebuoys, and visible defects every week.',
+    frequency: 'weekly',
+    contexts: ['safety'],
+    conditionTriggers: ['weekly-safety'],
+    responsibility: 'third-officer',
+    status: 'active',
+    traceability: [
+      { documentId: 'fleet-i13', excerptId: 'fleet-i13-weekly-lsa-ffa', sectionRef: '5.1' },
+    ],
+  },
+  {
+    id: 'lsa-ffa-monthly-check',
+    title: 'Perform monthly LSA and FFA inspection',
+    category: 'routine',
+    summary: 'Verify inventories, expiry-sensitive equipment, and operational readiness every month.',
+    frequency: 'monthly',
+    contexts: ['safety'],
+    conditionTriggers: ['monthly-safety'],
+    responsibility: 'third-officer',
+    status: 'active',
+    traceability: [
+      { documentId: 'fleet-i13', excerptId: 'fleet-i13-monthly-lsa-ffa', sectionRef: '5.2' },
+    ],
+  },
+].map((template) => RoutineTaskTemplateSchema.parse(template));

@@ -1,0 +1,34 @@
+{
+  "id": "fleet-i13",
+  "code": "FLEET-I13",
+  "title": "LSA and FFA Maintenance Instruction",
+  "revision": "2025.1",
+  "summary": "Weekly and monthly checks for life-saving appliances and fire-fighting appliances.",
+  "source": "Curated company manual excerpts",
+  "excerpts": [
+    {
+      "id": "fleet-i13-weekly-lsa-ffa",
+      "heading": "Weekly LSA and FFA inspection",
+      "summary": "Inspect emergency lighting, fire stations, lifebuoys, and visible defects every week.",
+      "body": "Weekly checks shall confirm emergency lighting readiness, fire station integrity, lifebuoy condition, and that defects are reported for immediate correction.",
+      "tags": ["weekly", "lsa", "ffa"],
+      "traceability": {
+        "documentId": "fleet-i13",
+        "excerptId": "fleet-i13-weekly-lsa-ffa",
+        "sectionRef": "5.1"
+      }
+    },
+    {
+      "id": "fleet-i13-monthly-lsa-ffa",
+      "heading": "Monthly LSA and FFA inspection",
+      "summary": "Perform a deeper inventory and operational check of lifesaving and firefighting equipment monthly.",
+      "body": "Monthly inspections shall verify inventories, expiry-sensitive equipment, communication links, and operational status of lifesaving and firefighting appliances.",
+      "tags": ["monthly", "lsa", "ffa"],
+      "traceability": {
+        "documentId": "fleet-i13",
+        "excerptId": "fleet-i13-monthly-lsa-ffa",
+        "sectionRef": "5.2"
+      }
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "id": "fleet-i21",
+  "code": "FLEET-I21",
+  "title": "Anchoring Instruction",
+  "revision": "2025.1",
+  "summary": "Anchoring preparation, cable monitoring, and hourly position verification guidance.",
+  "source": "Curated company manual excerpts",
+  "excerpts": [
+    {
+      "id": "fleet-i21-anchor-prep",
+      "heading": "Anchoring preparation",
+      "summary": "Confirm anchoring position, cable plan, and deck readiness before letting go the anchor.",
+      "body": "Before anchoring, verify charted position, swing circle, cable amount, under-keel clearance, bridge briefing, and forecastle readiness.",
+      "tags": ["anchoring", "preparation", "bridge-team"],
+      "traceability": {
+        "documentId": "fleet-i21",
+        "excerptId": "fleet-i21-anchor-prep",
+        "sectionRef": "2.2"
+      }
+    },
+    {
+      "id": "fleet-i21-anchor-hourly-check",
+      "heading": "Hourly anchor position check",
+      "summary": "Record position, cable lead, weather, and nearby traffic at least hourly while anchored.",
+      "body": "During anchor watch, record vessel position, cable lead, weather and current, nearby traffic, and any sign of dragging at least every hour or more often if conditions worsen.",
+      "tags": ["anchoring", "watch", "hourly"],
+      "traceability": {
+        "documentId": "fleet-i21",
+        "excerptId": "fleet-i21-anchor-hourly-check",
+        "sectionRef": "4.4"
+      }
+    }
+  ]
+}
