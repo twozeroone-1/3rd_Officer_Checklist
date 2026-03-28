@@ -15,9 +15,9 @@ type HomePageProps = {
 
 function PageSection(props: { title: string; children: React.ReactNode }) {
   return (
-    <section className="space-y-3">
+    <section className="tactical-list-section">
       <div className="flex items-center justify-between">
-        <h2 className="text-lg font-semibold text-white">{props.title}</h2>
+        <h2 className="tactical-list-title">{props.title}</h2>
       </div>
       <div className="space-y-3">{props.children}</div>
     </section>
@@ -25,7 +25,7 @@ function PageSection(props: { title: string; children: React.ReactNode }) {
 }
 
 function EmptyState({ label }: { label: string }) {
-  return <p className="rounded-2xl border border-dashed border-white/10 bg-white/5 px-4 py-4 text-sm text-slate-400">{label}</p>;
+  return <p className="tactical-empty">{label}</p>;
 }
 
 export function HomePage({ database = db, now, initialSelectedDate }: HomePageProps) {
@@ -124,12 +124,52 @@ export function HomePage({ database = db, now, initialSelectedDate }: HomePagePr
   }
 
   return (
-    <div className="space-y-6">
-      <section className="rounded-3xl border border-white/10 bg-white/5 p-5 shadow-[0_16px_40px_rgba(2,6,23,0.28)]">
-        <p className="text-xs uppercase tracking-[0.28em] text-cyan-200/80">Home</p>
-        <h2 className="mt-3 text-2xl font-semibold text-white">Today&apos;s bridge loop</h2>
-        <div className="mt-4">
-          <label className="text-sm text-slate-300" htmlFor="home-date-picker">
+    <div className="tactical-page">
+      <section className="tactical-panel-strong">
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <p className="tactical-kicker">Home control</p>
+            <h2 className="tactical-title">Today&apos;s duty board</h2>
+            <p className="tactical-copy">Operational work stays in front. Documents, notes, and settings remain in the same offline command stack.</p>
+          </div>
+          <div className="text-right">
+            <p className="tactical-meta">Selected date</p>
+            <p className="tactical-meta-value">{selectedDate}</p>
+          </div>
+        </div>
+
+        <div className="mt-5 tactical-stat-grid">
+          <div className="tactical-stat">
+            <p className="tactical-stat-label">Today</p>
+            <p className="tactical-stat-value">{data?.todayTasks.length ?? 0}</p>
+          </div>
+          <div className="tactical-stat">
+            <p className="tactical-stat-label">Due</p>
+            <p className="tactical-stat-value">{data?.dueTasks.length ?? 0}</p>
+          </div>
+          <div className="tactical-stat">
+            <p className="tactical-stat-label">Issues</p>
+            <p className="tactical-stat-value">{data?.carriedIssues.length ?? 0}</p>
+          </div>
+        </div>
+
+        <div className="mt-5 grid grid-cols-2 gap-2">
+          <a href="/scenarios" className="tactical-button-primary flex items-center justify-center">
+            Arrival
+          </a>
+          <a href="/scenarios" className="tactical-button-secondary flex items-center justify-center">
+            Departure
+          </a>
+          <a href="/scenarios" className="tactical-button-ghost flex items-center justify-center">
+            Anchoring
+          </a>
+          <a href="/scenarios" className="tactical-button-ghost flex items-center justify-center">
+            In-Port Watch
+          </a>
+        </div>
+
+        <div className="mt-5">
+          <label className="tactical-meta" htmlFor="home-date-picker">
             Selected date
           </label>
           <input
@@ -137,7 +177,7 @@ export function HomePage({ database = db, now, initialSelectedDate }: HomePagePr
             type="date"
             value={selectedDate}
             onChange={(event) => setSelectedDate(event.target.value)}
-            className="mt-2 min-h-12 w-full rounded-2xl border border-white/10 bg-slate-950 px-3 text-sm text-white"
+            className="tactical-input mt-3"
           />
         </div>
       </section>

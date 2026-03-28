@@ -29,20 +29,21 @@ export function SettingsPage({ database = db }: SettingsPageProps) {
   }
 
   return (
-    <div className="space-y-6">
-      <section className="rounded-3xl border border-white/10 bg-white/5 p-5 shadow-[0_16px_40px_rgba(2,6,23,0.28)]">
-        <p className="text-xs uppercase tracking-[0.28em] text-cyan-200/80">Settings</p>
-        <h2 className="mt-3 text-2xl font-semibold text-white">Device and offline controls</h2>
+    <div className="tactical-page">
+      <section className="support-panel">
+        <p className="support-kicker">Settings</p>
+        <h2 className="support-title">Device and offline controls</h2>
+        <p className="support-copy">Keep this page calmer than the operational screens while still matching the tactical palette and typography.</p>
       </section>
 
-      <section className="space-y-3 rounded-3xl border border-white/10 bg-white/5 p-4">
+      <section className="support-panel space-y-3">
         <div>
-          <p className="text-xs uppercase tracking-[0.28em] text-cyan-200/70">Theme</p>
-          <h3 className="mt-2 text-lg font-semibold text-white">Display mode</h3>
+          <p className="support-kicker">Theme</p>
+          <h3 className="mt-2 text-lg font-black text-[color:var(--text-primary)]">Display mode</h3>
         </div>
         <div className="grid gap-3">
           {themeChoices.map((choice) => (
-            <label key={choice} className="flex items-center gap-3 rounded-2xl bg-white/5 px-4 py-3 text-sm text-slate-200">
+            <label key={choice} className="flex items-center gap-3 border border-[color:var(--outline-soft)] bg-[color:var(--surface-lowest)] px-4 py-3 text-sm text-[color:var(--text-primary)]">
               <input type="radio" name="theme-choice" checked={theme === choice} onChange={() => void handleThemeChange(choice)} />
               <span>{themeLabels[choice]}</span>
             </label>
@@ -50,10 +51,10 @@ export function SettingsPage({ database = db }: SettingsPageProps) {
         </div>
       </section>
 
-      <section className="rounded-3xl border border-white/10 bg-white/5 p-4 text-sm text-slate-300">
-        <p className="text-xs uppercase tracking-[0.28em] text-cyan-200/70">Reminders</p>
-        <h3 className="mt-2 text-lg font-semibold text-white">{reminderPolicy.title}</h3>
-        <p className="mt-2 leading-6">{reminderPolicy.detail}</p>
+      <section className="support-panel text-sm text-[color:var(--text-secondary)]">
+        <p className="support-kicker">Reminders</p>
+        <h3 className="mt-2 text-lg font-black text-[color:var(--text-primary)]">{reminderPolicy.title}</h3>
+        <p className="mt-3 leading-6">{reminderPolicy.detail}</p>
       </section>
 
       <ContentVersionSection database={database} />

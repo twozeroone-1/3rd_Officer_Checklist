@@ -121,19 +121,27 @@ export function ScenarioSessionPage({ database = db, now, sessionId: sessionIdPr
 
   if (!data) {
     return (
-      <section className="rounded-3xl border border-white/10 bg-white/5 p-5 text-sm text-slate-300">
+      <section className="tactical-panel text-sm text-[color:var(--text-secondary)]">
         Scenario session not found.
       </section>
     );
   }
 
   return (
-    <div className="space-y-6">
-      <section className="rounded-3xl border border-white/10 bg-white/5 p-5 shadow-[0_16px_40px_rgba(2,6,23,0.28)]">
-        <p className="text-xs uppercase tracking-[0.28em] text-cyan-200/80">Scenario session</p>
-        <h2 className="mt-3 text-2xl font-semibold text-white">{formatScenarioTitle(data.session.scenario)} session</h2>
-        <p className="mt-2 text-sm leading-6 text-slate-300">Started {data.session.startedAt.replace('T', ' ').slice(0, 16)} UTC</p>
-        <label className="mt-4 block text-sm text-slate-300" htmlFor="scenario-date-picker">
+    <div className="tactical-page">
+      <section className="tactical-panel-strong">
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <p className="tactical-kicker">Scenario session</p>
+            <h2 className="tactical-title">{formatScenarioTitle(data.session.scenario)} session</h2>
+            <p className="tactical-copy">Started {data.session.startedAt.replace('T', ' ').slice(0, 16)} UTC</p>
+          </div>
+          <div className="text-right">
+            <p className="tactical-meta">Generated tasks</p>
+            <p className="tactical-meta-value">{data.views.length}</p>
+          </div>
+        </div>
+        <label className="tactical-meta mt-5 block" htmlFor="scenario-date-picker">
           Session date
         </label>
         <input
@@ -141,23 +149,23 @@ export function ScenarioSessionPage({ database = db, now, sessionId: sessionIdPr
           type="date"
           value={selectedDate}
           onChange={(event) => setSelectedDate(event.target.value)}
-          className="mt-2 min-h-12 w-full rounded-2xl border border-white/10 bg-slate-950 px-3 text-sm text-white"
+          className="tactical-input mt-3"
         />
         <button
           type="button"
           onClick={() => void handleCloseSession()}
-          className="mt-4 min-h-12 w-full rounded-2xl bg-cyan-300 px-3 text-sm font-semibold text-slate-950"
+          className="tactical-button-primary mt-4 w-full"
         >
           Complete and close session
         </button>
       </section>
 
-      <section className="space-y-3">
-        <h3 className="text-lg font-semibold text-white">Generated session work</h3>
+      <section className="tactical-list-section">
+        <h3 className="tactical-list-title">Generated session work</h3>
         {data.views.length ? (
           data.views.map((view) => <TaskCard key={view.item.id} view={view} onComplete={handleComplete} onOpen={openDetail} />)
         ) : (
-          <p className="rounded-2xl border border-dashed border-white/10 bg-white/5 px-4 py-4 text-sm text-slate-400">No generated scenario work for this session date.</p>
+          <p className="tactical-empty">No generated scenario work for this session date.</p>
         )}
       </section>
 

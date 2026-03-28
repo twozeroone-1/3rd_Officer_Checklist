@@ -16,28 +16,33 @@ export function DocumentsPage({ database = db }: DocumentsPageProps) {
   }, [database, query]);
 
   return (
-    <div className="space-y-5">
-      <section className="rounded-3xl border border-white/10 bg-white/5 p-5 shadow-[0_16px_40px_rgba(2,6,23,0.28)]">
-        <p className="text-xs uppercase tracking-[0.28em] text-cyan-200/80">Documents</p>
-        <h2 className="mt-3 text-2xl font-semibold text-white">Manual helper</h2>
+    <div className="tactical-page">
+      <section className="support-panel">
+        <p className="support-kicker">Documents</p>
+        <h2 className="support-title">Manual helper</h2>
+        <p className="support-copy">Search reference text by document code, keyword, or excerpt content without leaving the offline workflow.</p>
         <input
           type="search"
           value={query}
           onChange={(event) => setQuery(event.target.value)}
           placeholder="Search by keyword, code, or excerpt"
-          className="mt-4 min-h-12 w-full rounded-2xl border border-white/10 bg-slate-950 px-3 text-sm text-white"
+          className="tactical-input mt-4"
         />
       </section>
 
-      <section className="space-y-3">
-        {results.map((result) => (
-          <article key={`${result.documentId}:${result.excerptId}`} className="rounded-3xl border border-white/10 bg-white/5 p-4">
-            <p className="text-xs uppercase tracking-[0.25em] text-cyan-200/70">{result.document.code} - {result.sectionRef}</p>
-            <h3 className="mt-2 text-lg font-semibold text-white">{result.excerpt.heading}</h3>
-            <p className="mt-2 text-sm text-slate-300">{result.excerpt.summary}</p>
-            <p className="mt-3 text-sm leading-6 text-slate-400">{result.excerpt.body}</p>
-          </article>
-        ))}
+      <section className="tactical-list-section">
+        {results.length ? (
+          results.map((result) => (
+            <article key={`${result.documentId}:${result.excerptId}`} className="support-panel border-l-2 border-[color:var(--accent-secondary)]">
+              <p className="support-kicker">{result.document.code} / {result.sectionRef}</p>
+              <h3 className="mt-3 text-lg font-black uppercase tracking-tight text-[color:var(--text-primary)]">{result.excerpt.heading}</h3>
+              <p className="mt-3 text-sm leading-6 text-[color:var(--text-secondary)]">{result.excerpt.summary}</p>
+              <p className="mt-4 bg-[color:var(--surface-lowest)] px-3 py-3 text-sm leading-7 text-[color:var(--text-secondary)]">{result.excerpt.body}</p>
+            </article>
+          ))
+        ) : (
+          <p className="tactical-empty">No manual results match this search yet.</p>
+        )}
       </section>
     </div>
   );

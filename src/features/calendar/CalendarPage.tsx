@@ -15,12 +15,12 @@ type CalendarPageProps = {
 
 function WorkloadSection(props: { title: string; empty: string; views: TaskView[]; onComplete: (view: TaskView) => void; onOpen: (view: TaskView) => void }) {
   return (
-    <section className="space-y-3">
-      <h3 className="text-lg font-semibold text-white">{props.title}</h3>
+    <section className="tactical-list-section">
+      <h3 className="tactical-list-title">{props.title}</h3>
       {props.views.length ? (
         props.views.map((view) => <TaskCard key={view.item.id} view={view} onComplete={props.onComplete} onOpen={props.onOpen} />)
       ) : (
-        <p className="rounded-2xl border border-dashed border-white/10 bg-white/5 px-4 py-4 text-sm text-slate-400">{props.empty}</p>
+        <p className="tactical-empty">{props.empty}</p>
       )}
     </section>
   );
@@ -122,11 +122,20 @@ export function CalendarPage({ database = db, now }: CalendarPageProps) {
   }
 
   return (
-    <div className="space-y-6">
-      <section className="rounded-3xl border border-white/10 bg-white/5 p-5 shadow-[0_16px_40px_rgba(2,6,23,0.28)]">
-        <p className="text-xs uppercase tracking-[0.28em] text-cyan-200/80">Calendar</p>
-        <h2 className="mt-3 text-2xl font-semibold text-white">Workload by date</h2>
-        <label className="mt-4 block text-sm text-slate-300" htmlFor="calendar-date-picker">
+    <div className="tactical-page">
+      <section className="tactical-panel-strong">
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <p className="tactical-kicker">Calendar</p>
+            <h2 className="tactical-title">Workload by date</h2>
+            <p className="tactical-copy">This view stays date-first. You choose the workload date, then execute tasks with the real completion timestamp.</p>
+          </div>
+          <div className="text-right">
+            <p className="tactical-meta">Selected</p>
+            <p className="tactical-meta-value">{selectedDate}</p>
+          </div>
+        </div>
+        <label className="tactical-meta mt-5 block" htmlFor="calendar-date-picker">
           Selected workload date
         </label>
         <input
@@ -134,9 +143,9 @@ export function CalendarPage({ database = db, now }: CalendarPageProps) {
           type="date"
           value={selectedDate}
           onChange={(event) => setSelectedDate(event.target.value)}
-          className="mt-2 min-h-12 w-full rounded-2xl border border-white/10 bg-slate-950 px-3 text-sm text-white"
+          className="tactical-input mt-3"
         />
-        <p className="mt-3 rounded-2xl bg-white/5 px-4 py-3 text-sm leading-6 text-slate-300">
+        <p className="tactical-strip mt-4">
           Selected date changes which workload is generated. Execution actions still record the live UTC timestamp used when you tap complete, skip, or reschedule.
         </p>
       </section>

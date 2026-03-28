@@ -61,23 +61,23 @@ export function BackupRestoreSection({ database = db }: BackupRestoreSectionProp
   }
 
   return (
-    <section className="space-y-3 rounded-3xl border border-white/10 bg-white/5 p-4">
+    <section className="support-panel space-y-3">
       <div>
-        <p className="text-xs uppercase tracking-[0.28em] text-cyan-200/70">Backup</p>
-        <h3 className="mt-2 text-lg font-semibold text-white">Backup and restore</h3>
+        <p className="support-kicker">Backup</p>
+        <h3 className="mt-2 text-lg font-black text-[color:var(--text-primary)]">Backup and restore</h3>
       </div>
       <button
         type="button"
         onClick={() => void handleExport()}
-        className="min-h-12 w-full rounded-2xl bg-cyan-300 px-3 text-sm font-semibold text-slate-950"
+        className="tactical-button-secondary w-full"
       >
         Export backup JSON
       </button>
-      <label className="block rounded-2xl bg-white/5 px-4 py-3 text-sm text-slate-300">
-        <span className="font-medium text-white">Import backup JSON</span>
-        <input aria-label="Import backup JSON" type="file" accept="application/json" onChange={(event) => void handleImport(event)} className="mt-3 block w-full text-sm text-slate-200" />
+      <label className="block border border-[color:var(--outline-soft)] bg-[color:var(--surface-lowest)] px-4 py-3 text-sm text-[color:var(--text-secondary)]">
+        <span className="font-black uppercase tracking-[0.12em] text-[color:var(--text-primary)]">Import backup JSON</span>
+        <input aria-label="Import backup JSON" type="file" accept="application/json" onChange={(event) => void handleImport(event)} className="mt-3 block w-full text-sm text-[color:var(--text-primary)]" />
       </label>
-      {status ? <p role="status" className="rounded-2xl bg-white/5 px-4 py-3 text-sm text-slate-300">{status}</p> : null}
+      {status ? <p role="status" className="border border-[color:var(--outline-soft)] bg-[color:var(--surface-lowest)] px-4 py-3 text-sm text-[color:var(--text-secondary)]">{status}</p> : null}
     </section>
   );
 }

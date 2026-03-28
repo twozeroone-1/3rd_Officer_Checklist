@@ -1,33 +1,46 @@
 @import "tailwindcss";
 
 @theme {
-  --color-canvas: #000000;
-  --color-foam: #f8fafc;
+  --color-canvas: #131313;
+  --color-foam: #e2e2e2;
 }
 
 :root {
   color-scheme: dark;
-  font-family: "Segoe UI", "Helvetica Neue", sans-serif;
-  background: #000000;
+  font-family: "Pretendard Variable", "Pretendard", "SUIT Variable", "Inter", "Noto Sans KR", sans-serif;
+  background: #131313;
   --body-background:
-    radial-gradient(circle at top, rgba(34, 211, 238, 0.14), transparent 32%),
-    linear-gradient(180deg, #020617 0%, #000000 34%, #000000 100%);
+    radial-gradient(circle at top, rgba(255, 191, 0, 0.08), transparent 26%),
+    linear-gradient(180deg, #181818 0%, #131313 30%, #131313 100%);
   --app-shell-background:
-    radial-gradient(circle at top, rgba(125, 211, 252, 0.18), transparent 38%),
-    linear-gradient(180deg, rgba(15, 23, 42, 0.84), rgba(0, 0, 0, 1) 40%);
-  --hero-background: rgba(255, 255, 255, 0.05);
-  --nav-background: rgba(0, 0, 0, 0.95);
+    linear-gradient(180deg, rgba(27, 27, 27, 0.98) 0%, rgba(19, 19, 19, 1) 28%);
+  --hero-background: linear-gradient(180deg, rgba(42, 42, 42, 0.92), rgba(27, 27, 27, 0.96));
+  --nav-background: rgba(27, 27, 27, 0.98);
+  --surface-lowest: #0e0e0e;
+  --surface-low: #1b1b1b;
+  --surface-high: #2a2a2a;
+  --surface-highest: #353535;
+  --text-primary: #e2e2e2;
+  --text-secondary: #b7b1a6;
+  --text-muted: #8b857c;
+  --text-faint: #6e685f;
+  --accent-primary: #ffbf00;
+  --accent-primary-soft: #ffe2ab;
+  --accent-secondary: #46eaed;
+  --danger: #ffb4ab;
+  --danger-bg: #93000a;
+  --outline-soft: rgba(156, 143, 120, 0.18);
+  --outline-strong: rgba(156, 143, 120, 0.3);
 }
 
 :root[data-theme='night'] {
   --body-background:
-    radial-gradient(circle at top, rgba(21, 94, 117, 0.12), transparent 26%),
-    linear-gradient(180deg, #000000 0%, #000000 100%);
+    radial-gradient(circle at top, rgba(70, 234, 237, 0.08), transparent 18%),
+    linear-gradient(180deg, #090909 0%, #000000 32%, #000000 100%);
   --app-shell-background:
-    radial-gradient(circle at top, rgba(8, 145, 178, 0.12), transparent 24%),
-    linear-gradient(180deg, #000000 0%, #000000 100%);
-  --hero-background: rgba(255, 255, 255, 0.03);
-  --nav-background: rgba(0, 0, 0, 0.98);
+    linear-gradient(180deg, rgba(17, 17, 17, 0.98), rgba(0, 0, 0, 1) 28%);
+  --hero-background: linear-gradient(180deg, rgba(27, 27, 27, 0.94), rgba(14, 14, 14, 0.98));
+  --nav-background: rgba(15, 15, 15, 0.98);
 }
 
 html,
@@ -40,7 +53,9 @@ body {
   margin: 0;
   min-width: 320px;
   background: var(--body-background);
-  color: #f8fafc;
+  color: var(--text-primary);
+  letter-spacing: 0.01em;
+  overflow-x: hidden;
 }
 
 a {
@@ -51,4 +66,235 @@ a {
 button,
 a {
   -webkit-tap-highlight-color: transparent;
+}
+
+button,
+input,
+select,
+textarea {
+  border-radius: 0;
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+::selection {
+  background: var(--accent-primary);
+  color: #261a00;
+}
+
+.tactical-page {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.tactical-panel,
+.support-panel {
+  border: 1px solid var(--outline-soft);
+  background: var(--surface-low);
+  padding: 1rem;
+}
+
+.tactical-panel-strong {
+  border: 1px solid var(--outline-strong);
+  border-left: 4px solid var(--accent-primary);
+  background: linear-gradient(180deg, rgba(42, 42, 42, 0.98), rgba(27, 27, 27, 0.98));
+  padding: 1rem;
+}
+
+.support-panel {
+  background: linear-gradient(180deg, rgba(36, 36, 36, 0.96), rgba(24, 24, 24, 0.98));
+}
+
+.tactical-kicker {
+  color: var(--accent-secondary);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+}
+
+.support-kicker {
+  color: var(--text-secondary);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+.tactical-title {
+  margin-top: 0.75rem;
+  color: var(--text-primary);
+  font-size: 1.8rem;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.support-title {
+  margin-top: 0.75rem;
+  color: var(--text-primary);
+  font-size: 1.45rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+
+.tactical-copy,
+.support-copy {
+  margin-top: 0.6rem;
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+  line-height: 1.65;
+}
+
+.tactical-meta {
+  color: var(--text-faint);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.tactical-meta-value {
+  color: var(--accent-primary-soft);
+  font-size: 0.82rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.tactical-strip {
+  border: 1px solid var(--outline-soft);
+  background: var(--surface-lowest);
+  color: var(--text-secondary);
+  padding: 0.75rem 0.85rem;
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+
+.tactical-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.tactical-stat {
+  border-left: 2px solid var(--accent-primary);
+  background: var(--surface-lowest);
+  padding: 0.75rem;
+}
+
+.tactical-stat-label {
+  color: var(--text-faint);
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.tactical-stat-value {
+  margin-top: 0.45rem;
+  color: var(--text-primary);
+  font-size: 1.35rem;
+  font-weight: 900;
+  letter-spacing: -0.05em;
+}
+
+.tactical-input,
+.tactical-select,
+.tactical-textarea {
+  width: 100%;
+  border: 1px solid var(--outline-soft);
+  border-bottom: 2px solid var(--surface-highest);
+  background: var(--surface-lowest);
+  color: var(--text-primary);
+  padding: 0.85rem 0.9rem;
+  box-sizing: border-box;
+}
+
+.tactical-input::placeholder,
+.tactical-textarea::placeholder {
+  color: var(--text-faint);
+}
+
+.tactical-textarea {
+  min-height: 7rem;
+  resize: vertical;
+}
+
+.tactical-button-primary,
+.tactical-button-secondary,
+.tactical-button-ghost,
+.tactical-button-danger {
+  min-height: 3.2rem;
+  border: 1px solid var(--outline-soft);
+  padding: 0.8rem 0.9rem;
+  font-size: 0.76rem;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  transition: background-color 150ms linear, color 150ms linear, border-color 150ms linear, transform 150ms linear;
+}
+
+.tactical-button-primary {
+  background: linear-gradient(45deg, var(--accent-primary-soft) 0%, var(--accent-primary) 100%);
+  border-color: var(--accent-primary);
+  color: #261a00;
+}
+
+.tactical-button-secondary {
+  background: rgba(70, 234, 237, 0.14);
+  border-color: rgba(70, 234, 237, 0.28);
+  color: var(--accent-secondary);
+}
+
+.tactical-button-ghost {
+  background: var(--surface-high);
+  border-color: var(--outline-soft);
+  color: var(--text-primary);
+}
+
+.tactical-button-danger {
+  background: rgba(147, 0, 10, 0.42);
+  border-color: rgba(255, 180, 171, 0.3);
+  color: var(--danger);
+}
+
+.tactical-button-primary:active,
+.tactical-button-secondary:active,
+.tactical-button-ghost:active,
+.tactical-button-danger:active {
+  transform: scale(0.98);
+}
+
+.tactical-empty {
+  border: 1px dashed var(--outline-soft);
+  background: var(--surface-lowest);
+  color: var(--text-muted);
+  padding: 0.95rem;
+  font-size: 0.9rem;
+}
+
+.tactical-list-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.tactical-list-title {
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.tactical-support-title {
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-weight: 800;
 }

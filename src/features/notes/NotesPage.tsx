@@ -104,45 +104,48 @@ export function NotesPage({ database = db, now }: NotesPageProps) {
   }
 
   return (
-    <div className="space-y-6">
-      <section className="rounded-3xl border border-white/10 bg-white/5 p-5 shadow-[0_16px_40px_rgba(2,6,23,0.28)]">
-        <p className="text-xs uppercase tracking-[0.28em] text-cyan-200/80">Notes</p>
-        <h2 className="mt-3 text-2xl font-semibold text-white">Bridge notes</h2>
+    <div className="tactical-page">
+      <section className="support-panel">
+        <p className="support-kicker">Notes</p>
+        <h2 className="support-title">Bridge notes</h2>
+        <p className="support-copy">Store free notes and task-linked handover notes in the same onboard visual language without making this screen feel as intense as the action screens.</p>
       </section>
 
-      <form onSubmit={handleFreeSubmit} className="space-y-3 rounded-3xl border border-white/10 bg-white/5 p-4">
-        <h3 className="text-lg font-semibold text-white">Free note</h3>
-        <input value={freeTitle} onChange={(event) => setFreeTitle(event.target.value)} placeholder="Title" className="min-h-12 w-full rounded-2xl border border-white/10 bg-slate-950 px-3 text-white" />
-        <textarea value={freeBody} onChange={(event) => setFreeBody(event.target.value)} placeholder="Write a free bridge note" className="min-h-24 w-full rounded-2xl border border-white/10 bg-slate-950 px-3 py-3 text-white" />
-        <button type="submit" className="min-h-12 w-full rounded-2xl bg-cyan-300 px-3 text-sm font-semibold text-slate-950">Save free note</button>
+      <form onSubmit={handleFreeSubmit} className="support-panel space-y-3">
+        <p className="support-kicker">Free note</p>
+        <h3 className="tactical-support-title">General bridge memo</h3>
+        <input value={freeTitle} onChange={(event) => setFreeTitle(event.target.value)} placeholder="Title" className="tactical-input" />
+        <textarea value={freeBody} onChange={(event) => setFreeBody(event.target.value)} placeholder="Write a free bridge note" className="tactical-textarea" />
+        <button type="submit" className="tactical-button-secondary w-full">Save free note</button>
       </form>
 
-      <form onSubmit={handleLinkedSubmit} className="space-y-3 rounded-3xl border border-white/10 bg-white/5 p-4">
-        <h3 className="text-lg font-semibold text-white">Task-linked note</h3>
-        <select value={linkedId} onChange={(event) => setLinkedId(event.target.value)} className="min-h-12 w-full rounded-2xl border border-white/10 bg-slate-950 px-3 text-white">
+      <form onSubmit={handleLinkedSubmit} className="support-panel space-y-3">
+        <p className="support-kicker">Task-linked note</p>
+        <h3 className="tactical-support-title">Attach to execution item</h3>
+        <select value={linkedId} onChange={(event) => setLinkedId(event.target.value)} className="tactical-select">
           {targets.map((target) => (
             <option key={target.id} value={target.id}>
               {target.title}
             </option>
           ))}
         </select>
-        <input value={linkedTitle} onChange={(event) => setLinkedTitle(event.target.value)} placeholder="Title" className="min-h-12 w-full rounded-2xl border border-white/10 bg-slate-950 px-3 text-white" />
-        <textarea value={linkedBody} onChange={(event) => setLinkedBody(event.target.value)} placeholder="Write a linked note" className="min-h-24 w-full rounded-2xl border border-white/10 bg-slate-950 px-3 py-3 text-white" />
+        <input value={linkedTitle} onChange={(event) => setLinkedTitle(event.target.value)} placeholder="Title" className="tactical-input" />
+        <textarea value={linkedBody} onChange={(event) => setLinkedBody(event.target.value)} placeholder="Write a linked note" className="tactical-textarea" />
         <button
           type="submit"
           disabled={!linkedId}
-          className="min-h-12 w-full rounded-2xl bg-cyan-300 px-3 text-sm font-semibold text-slate-950 disabled:cursor-not-allowed disabled:bg-slate-700 disabled:text-slate-300"
+          className="tactical-button-secondary w-full disabled:cursor-not-allowed disabled:border-[color:var(--outline-soft)] disabled:bg-[color:var(--surface-high)] disabled:text-[color:var(--text-muted)]"
         >
           Save linked note
         </button>
       </form>
 
-      <section className="space-y-3">
+      <section className="tactical-list-section">
         {notes.map((note) => (
-          <article key={note.id} className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3">
-            <p className="text-xs uppercase tracking-[0.25em] text-cyan-200/70">{note.linkedType}</p>
-            <h3 className="mt-2 text-base font-semibold text-white">{note.title}</h3>
-            <p className="mt-2 text-sm text-slate-300">{note.body}</p>
+          <article key={note.id} className="support-panel border-l-2 border-[color:var(--accent-primary)]">
+            <p className="support-kicker">{note.linkedType}</p>
+            <h3 className="mt-2 text-base font-black uppercase tracking-tight text-[color:var(--text-primary)]">{note.title}</h3>
+            <p className="mt-3 text-sm leading-6 text-[color:var(--text-secondary)]">{note.body}</p>
           </article>
         ))}
       </section>

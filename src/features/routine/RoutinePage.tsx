@@ -86,29 +86,39 @@ export function RoutinePage({ database = db, now }: RoutinePageProps) {
   }
 
   return (
-    <div className="space-y-6">
-      <section className="rounded-3xl border border-white/10 bg-white/5 p-5 shadow-[0_16px_40px_rgba(2,6,23,0.28)]">
-        <p className="text-xs uppercase tracking-[0.28em] text-cyan-200/80">Routine</p>
-        <h2 className="mt-3 text-2xl font-semibold text-white">Checks by frequency</h2>
+    <div className="tactical-page">
+      <section className="tactical-panel-strong">
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <p className="tactical-kicker">Routine control</p>
+            <h2 className="tactical-title">Checks by frequency</h2>
+            <p className="tactical-copy">Daily, weekly, monthly, and conditional routines stay grouped for fast bridge execution.</p>
+          </div>
+          <div className="text-right">
+            <p className="tactical-meta">Open items</p>
+            <p className="tactical-meta-value">{views.length}</p>
+          </div>
+        </div>
         <input
           type="date"
           value={selectedDate}
           onChange={(event) => setSelectedDate(event.target.value)}
-          className="mt-4 min-h-12 w-full rounded-2xl border border-white/10 bg-slate-950 px-3 text-sm text-white"
+          className="tactical-input mt-5"
         />
       </section>
 
       {groups.map((group) => {
         const entries = views.filter((view) => view.frequency === group);
         return (
-          <section key={group} className="space-y-3">
-            <h3 className="text-lg font-semibold capitalize text-white">{group}</h3>
+          <section key={group} className="tactical-list-section">
+            <div className="flex items-center justify-between">
+              <h3 className="tactical-list-title">{group}</h3>
+              <span className="tactical-meta-value">{entries.length}</span>
+            </div>
             {entries.length ? (
               entries.map((view) => <TaskCard key={view.item.id} view={view} onComplete={handleComplete} onOpen={openDetail} />)
             ) : (
-              <p className="rounded-2xl border border-dashed border-white/10 bg-white/5 px-4 py-4 text-sm text-slate-400">
-                No {group} routine items on this date.
-              </p>
+              <p className="tactical-empty">No {group} routine items on this date.</p>
             )}
           </section>
         );

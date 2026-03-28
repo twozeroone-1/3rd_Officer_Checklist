@@ -56,22 +56,22 @@ export function ScenariosPage({ database = db, now }: ScenariosPageProps) {
   const activeSessions = sessions.filter((session) => session.status === 'active');
 
   return (
-    <div className="space-y-6">
-      <section className="rounded-3xl border border-white/10 bg-white/5 p-5 shadow-[0_16px_40px_rgba(2,6,23,0.28)]">
-        <p className="text-xs uppercase tracking-[0.28em] text-cyan-200/80">Scenarios</p>
-        <h2 className="mt-3 text-2xl font-semibold text-white">Guided bridge modes</h2>
-        <p className="mt-2 text-sm leading-6 text-slate-300">Start a focused session for arrival, departure, anchoring, or in-port watch work.</p>
+    <div className="tactical-page">
+      <section className="tactical-panel-strong">
+        <p className="tactical-kicker">Scenarios</p>
+        <h2 className="tactical-title">Guided bridge modes</h2>
+        <p className="tactical-copy">Start a focused session for arrival, departure, anchoring, or in-port watch work.</p>
       </section>
 
-      <section className="space-y-3">
+      <section className="tactical-list-section">
         {scenarioCatalog.map((scenario) => (
-          <article key={scenario.type} className="rounded-3xl border border-white/10 bg-white/5 p-4 shadow-[0_12px_36px_rgba(2,6,23,0.24)]">
-            <p className="text-xs uppercase tracking-[0.28em] text-cyan-200/70">{scenario.title}</p>
-            <p className="mt-2 text-sm leading-6 text-slate-300">{scenario.summary}</p>
+          <article key={scenario.type} className="tactical-panel border-l-2 border-[color:var(--accent-primary)]">
+            <p className="tactical-kicker">{scenario.title}</p>
+            <p className="mt-3 text-sm leading-6 text-[color:var(--text-secondary)]">{scenario.summary}</p>
             <button
               type="button"
               onClick={() => void handleStart(scenario.type)}
-              className="mt-4 min-h-12 w-full rounded-2xl bg-cyan-300 px-3 text-sm font-semibold text-slate-950"
+              className="tactical-button-primary mt-4 w-full"
               aria-label={`Start ${scenario.title} session`}
             >
               Start session
@@ -80,16 +80,16 @@ export function ScenariosPage({ database = db, now }: ScenariosPageProps) {
         ))}
       </section>
 
-      <section className="space-y-3">
-        <h3 className="text-lg font-semibold text-white">Active sessions</h3>
+      <section className="tactical-list-section">
+        <h3 className="tactical-list-title">Active sessions</h3>
         {activeSessions.length ? (
           activeSessions.map((session) => (
-            <article key={session.id} className="rounded-3xl border border-white/10 bg-white/5 p-4">
-              <p className="text-xs uppercase tracking-[0.28em] text-cyan-200/70">{formatScenarioTitle(session.scenario)}</p>
-              <p className="mt-2 text-sm text-slate-300">Started {session.startedAt.replace('T', ' ').slice(0, 16)} UTC</p>
+            <article key={session.id} className="tactical-panel border-l-2 border-[color:var(--accent-secondary)]">
+              <p className="tactical-kicker">{formatScenarioTitle(session.scenario)}</p>
+              <p className="mt-3 text-sm text-[color:var(--text-secondary)]">Started {session.startedAt.replace('T', ' ').slice(0, 16)} UTC</p>
               <Link
                 to={`/scenarios/${session.id}`}
-                className="mt-4 flex min-h-12 items-center justify-center rounded-2xl bg-white/10 px-3 text-sm font-medium text-white"
+                className="tactical-button-ghost mt-4 flex items-center justify-center"
                 aria-label={`Open ${formatScenarioTitle(session.scenario)} session`}
               >
                 Open session
@@ -97,7 +97,7 @@ export function ScenariosPage({ database = db, now }: ScenariosPageProps) {
             </article>
           ))
         ) : (
-          <p className="rounded-2xl border border-dashed border-white/10 bg-white/5 px-4 py-4 text-sm text-slate-400">No active sessions yet.</p>
+          <p className="tactical-empty">No active sessions yet.</p>
         )}
       </section>
     </div>

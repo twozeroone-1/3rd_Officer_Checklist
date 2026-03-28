@@ -25,17 +25,17 @@ export function ContentVersionSection({ database = db }: ContentVersionSectionPr
   }, [database]);
 
   return (
-    <section className="space-y-3 rounded-3xl border border-white/10 bg-white/5 p-4">
+    <section className="support-panel space-y-3">
       <div>
-        <p className="text-xs uppercase tracking-[0.28em] text-cyan-200/70">Content</p>
-        <h3 className="mt-2 text-lg font-semibold text-white">App and manual versions</h3>
+        <p className="support-kicker">Content</p>
+        <h3 className="mt-2 text-lg font-black text-[color:var(--text-primary)]">App and manual versions</h3>
       </div>
-      <div className="rounded-2xl bg-white/5 px-4 py-3 text-sm text-slate-300">
-        <p className="font-medium text-white">App build</p>
+      <div className="border border-[color:var(--outline-soft)] bg-[color:var(--surface-lowest)] px-4 py-3 text-sm text-[color:var(--text-secondary)]">
+        <p className="font-black uppercase tracking-[0.12em] text-[color:var(--text-primary)]">App build</p>
         <p className="mt-1">v{APP_VERSION}</p>
       </div>
-      <div className="rounded-2xl bg-white/5 px-4 py-3 text-sm text-slate-300">
-        <p className="font-medium text-white">Manual content pack</p>
+      <div className="border border-[color:var(--outline-soft)] bg-[color:var(--surface-lowest)] px-4 py-3 text-sm text-[color:var(--text-secondary)]">
+        <p className="font-black uppercase tracking-[0.12em] text-[color:var(--text-primary)]">Manual content pack</p>
         <p className="mt-1">Seed v{manualSeedVersion ?? 'unknown'} • {manualCount} manuals • {templateCount} templates</p>
       </div>
     </section>
