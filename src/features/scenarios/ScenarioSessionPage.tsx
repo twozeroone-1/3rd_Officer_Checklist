@@ -122,7 +122,7 @@ export function ScenarioSessionPage({ database = db, now, sessionId: sessionIdPr
   if (!data) {
     return (
       <section className="tactical-panel text-sm text-[color:var(--text-secondary)]">
-        Scenario session not found.
+        세션을 찾을 수 없습니다.
       </section>
     );
   }
@@ -137,31 +137,31 @@ export function ScenarioSessionPage({ database = db, now, sessionId: sessionIdPr
       <section className="tactical-panel-strong">
         <div className="flex items-start justify-between gap-4">
           <div>
-            <p className="tactical-kicker">Scenario session</p>
-            <h2 className="tactical-title">{formatScenarioTitle(data.session.scenario)} session</h2>
-            <p className="tactical-copy">Started {data.session.startedAt.replace('T', ' ').slice(0, 16)} UTC</p>
+            <p className="tactical-kicker">상황 세션</p>
+            <h2 className="tactical-title">{formatScenarioTitle(data.session.scenario)} 세션</h2>
+            <p className="tactical-copy">시작 {data.session.startedAt.replace('T', ' ').slice(0, 16)} UTC</p>
           </div>
           <div className="text-right">
-            <p className="tactical-meta">Generated tasks</p>
+            <p className="tactical-meta">생성 업무</p>
             <p className="tactical-meta-value">{data.views.length}</p>
           </div>
         </div>
         <div className="mt-4 tactical-stat-grid">
           <div className="tactical-stat">
-            <p className="tactical-stat-label">Open</p>
+            <p className="tactical-stat-label">미완료</p>
             <p className="tactical-stat-value">{openCount}</p>
           </div>
           <div className="tactical-stat">
-            <p className="tactical-stat-label">Done</p>
+            <p className="tactical-stat-label">완료</p>
             <p className="tactical-stat-value">{completedCount}</p>
           </div>
           <div className="tactical-stat">
-            <p className="tactical-stat-label">Blocked</p>
+            <p className="tactical-stat-label">이슈</p>
             <p className="tactical-stat-value">{blockedCount}</p>
           </div>
         </div>
         <label className="tactical-meta mt-5 block" htmlFor="scenario-date-picker">
-          Session date
+          세션 기준 날짜
         </label>
         <input
           id="scenario-date-picker"
@@ -175,14 +175,14 @@ export function ScenarioSessionPage({ database = db, now, sessionId: sessionIdPr
           onClick={() => void handleCloseSession()}
           className="tactical-button-primary mt-4 w-full"
         >
-          Complete and close session
+          세션 종료 및 완료
         </button>
       </section>
 
       {blockedViews.length ? (
         <section className="tactical-panel border-l-4 border-[color:var(--danger)]">
           <p className="tactical-kicker" style={{ color: 'var(--danger)' }}>
-            High-risk unresolved
+            고위험 미해결
           </p>
           <div className="mt-3 space-y-3">
             {blockedViews.map((view) => (
@@ -196,11 +196,11 @@ export function ScenarioSessionPage({ database = db, now, sessionId: sessionIdPr
       ) : null}
 
       <section className="tactical-list-section">
-        <h3 className="tactical-list-title">Generated session work</h3>
+        <h3 className="tactical-list-title">세션 업무</h3>
         {data.views.length ? (
           data.views.map((view) => <TaskCard key={view.item.id} view={view} onComplete={handleComplete} onOpen={openDetail} />)
         ) : (
-          <p className="tactical-empty">No generated scenario work for this session date.</p>
+          <p className="tactical-empty">해당 날짜에 생성된 상황 업무가 없습니다.</p>
         )}
       </section>
 

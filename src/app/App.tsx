@@ -4,13 +4,13 @@ import { router } from './router';
 import { AppProviders } from './providers';
 
 const navItems = [
-  { to: '/', code: 'CTL', label: 'Home' },
-  { to: '/routine', code: 'RUN', label: 'Routine' },
-  { to: '/scenarios', code: 'MOD', label: 'Scenarios' },
-  { to: '/calendar', code: 'CAL', label: 'Calendar' },
-  { to: '/documents', code: 'DOC', label: 'Documents' },
-  { to: '/notes', code: 'LOG', label: 'Notes' },
-  { to: '/settings', code: 'CFG', label: 'Settings' },
+  { to: '/', code: 'CTL', label: '홈' },
+  { to: '/routine', code: 'RUN', label: '정기' },
+  { to: '/scenarios', code: 'MOD', label: '상황' },
+  { to: '/calendar', code: 'CAL', label: '일정' },
+  { to: '/documents', code: 'DOC', label: '문서' },
+  { to: '/notes', code: 'LOG', label: '메모' },
+  { to: '/settings', code: 'CFG', label: '설정' },
 ];
 
 export function AppLayout() {
@@ -22,16 +22,16 @@ export function AppLayout() {
             <div className="flex items-start justify-between gap-4">
               <div>
                 <p className="tactical-kicker" style={{ color: 'var(--accent-primary)' }}>
-                  Third Officer Assistant
+                  3등 항해사 체크리스트
                 </p>
-                <h1 className="tactical-title">NAV COMMAND</h1>
+                <h1 className="tactical-title">항해 업무</h1>
               </div>
               <div className="text-right">
-                <p className="tactical-meta">Platform</p>
+                <p className="tactical-meta">플랫폼</p>
                 <p className="tactical-meta-value">Android PWA</p>
               </div>
             </div>
-            <p className="tactical-copy">Offline routine control, scenario execution, documents, notes, and settings stay available onboard.</p>
+            <p className="tactical-copy">오프라인 상태에서도 정기 업무, 상황 모드, 문서, 메모, 설정을 선내에서 바로 사용할 수 있습니다.</p>
           </div>
         </header>
 
@@ -40,7 +40,7 @@ export function AppLayout() {
         </main>
 
         <nav
-          aria-label="Primary"
+          aria-label="주요 탐색"
           className="fixed inset-x-0 bottom-0 z-10 mx-auto flex max-w-md gap-2 overflow-x-auto border-t-2 border-[color:var(--surface-highest)] px-2 py-2 backdrop-blur"
           style={{ background: 'var(--nav-background)' }}
         >

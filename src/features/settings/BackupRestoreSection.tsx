@@ -16,7 +16,7 @@ async function readFileText(file: File) {
     const reader = new FileReader();
 
     reader.onload = () => resolve(String(reader.result ?? ''));
-    reader.onerror = () => reject(reader.error ?? new Error('Unable to read backup file'));
+    reader.onerror = () => reject(reader.error ?? new Error('백업 파일을 읽을 수 없습니다'));
     reader.readAsText(file);
   });
 }
@@ -36,7 +36,7 @@ export function BackupRestoreSection({ database = db }: BackupRestoreSectionProp
       anchor.download = `third-officer-backup-${envelope.exportedAt.slice(0, 10)}.json`;
       anchor.click();
       URL.revokeObjectURL(url);
-      setStatus(`Exported backup ${anchor.download}`);
+      setStatus(`백업 파일을 내보냈습니다: ${anchor.download}`);
     } catch (error) {
       setStatus(getBackupImportErrorMessage(error));
     }
@@ -53,7 +53,7 @@ export function BackupRestoreSection({ database = db }: BackupRestoreSectionProp
       const text = await readFileText(file);
       const parsed = JSON.parse(text) as unknown;
       const envelope = await restoreDatabaseBackup(database, parsed);
-      setStatus(`Imported backup from ${envelope.exportedAt}`);
+      setStatus(`백업을 불러왔습니다: ${envelope.exportedAt}`);
     } catch (error) {
       setStatus(getBackupImportErrorMessage(error));
     } finally {
@@ -64,19 +64,19 @@ export function BackupRestoreSection({ database = db }: BackupRestoreSectionProp
   return (
     <section className="support-panel space-y-3">
       <div>
-        <p className="support-kicker">Backup</p>
-        <h3 className="mt-2 text-lg font-black text-[color:var(--text-primary)]">Backup and restore</h3>
+        <p className="support-kicker">백업</p>
+        <h3 className="mt-2 text-lg font-black text-[color:var(--text-primary)]">백업 및 복원</h3>
       </div>
       <button
         type="button"
         onClick={() => void handleExport()}
         className="tactical-button-secondary w-full"
       >
-        Export backup JSON
+        백업 JSON 내보내기
       </button>
       <label className="block border border-[color:var(--outline-soft)] bg-[color:var(--surface-lowest)] px-4 py-3 text-sm text-[color:var(--text-secondary)]">
-        <span className="font-black uppercase tracking-[0.12em] text-[color:var(--text-primary)]">Import backup JSON</span>
-        <input aria-label="Import backup JSON" type="file" accept="application/json" onChange={(event) => void handleImport(event)} className="mt-3 block w-full text-sm text-[color:var(--text-primary)]" />
+        <span className="font-black uppercase tracking-[0.12em] text-[color:var(--text-primary)]">백업 JSON 가져오기</span>
+        <input aria-label="백업 JSON 가져오기" type="file" accept="application/json" onChange={(event) => void handleImport(event)} className="mt-3 block w-full text-sm text-[color:var(--text-primary)]" />
       </label>
       {status ? (
         <p

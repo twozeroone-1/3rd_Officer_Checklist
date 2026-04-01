@@ -36,16 +36,16 @@ describe('CalendarPage', () => {
     });
 
     const view = render(<CalendarPage database={database} now="2026-04-01T03:20:00.000Z" />);
-    const carryOverSection = (await screen.findByRole('heading', { name: /carry-over work/i })).closest('section')!;
-    const scenarioSection = (await screen.findByRole('heading', { name: /active scenario work/i })).closest('section')!;
+    const carryOverSection = (await screen.findByRole('heading', { name: /이월 업무/i })).closest('section')!;
+    const scenarioSection = (await screen.findByRole('heading', { name: /진행 중 상황 업무/i })).closest('section')!;
 
-    expect(await screen.findByRole('heading', { name: /workload by date/i })).toBeInTheDocument();
+    expect(await screen.findByRole('heading', { name: /날짜별 업무/i })).toBeInTheDocument();
     expect(await screen.findByText(/run anchoring preparation/i)).toBeInTheDocument();
     expect((await within(scenarioSection).findAllByText(/record hourly anchor position check/i)).length).toBeGreaterThan(0);
     expect(await within(carryOverSection).findByText(/check navigational equipment readiness/i)).toBeInTheDocument();
-    expect(screen.getByText(/execution actions still record the live utc timestamp/i)).toBeInTheDocument();
+    expect(screen.getByText(/실제 utc 시간이 기록됩니다/i)).toBeInTheDocument();
 
-    fireEvent.change(screen.getByLabelText(/selected workload date/i), { target: { value: '2026-04-02' } });
+    fireEvent.change(screen.getByLabelText(/업무 기준 날짜/i), { target: { value: '2026-04-02' } });
 
     await waitFor(() => {
       expect(within(scenarioSection).queryAllByText(/record hourly anchor position check/i)).toHaveLength(0);
@@ -72,7 +72,7 @@ describe('CalendarPage', () => {
     });
 
     const view = render(<CalendarPage database={database} now="2026-04-01T03:20:00.000Z" />);
-    const carryOverSection = (await screen.findByRole('heading', { name: /carry-over work/i })).closest('section')!;
+    const carryOverSection = (await screen.findByRole('heading', { name: /이월 업무/i })).closest('section')!;
 
     expect(await within(carryOverSection).findByText(/prepare for watch handover/i)).toBeInTheDocument();
     expect(await within(carryOverSection).findByText(/still pending from yesterday/i)).toBeInTheDocument();

@@ -126,31 +126,31 @@ export function CalendarPage({ database = db, now }: CalendarPageProps) {
       <section className="tactical-panel-strong">
         <div className="flex items-start justify-between gap-4">
           <div>
-            <p className="tactical-kicker">Calendar</p>
-            <h2 className="tactical-title">Workload by date</h2>
-            <p className="tactical-copy">This view stays date-first. You choose the workload date, then execute tasks with the real completion timestamp.</p>
+            <p className="tactical-kicker">일정</p>
+            <h2 className="tactical-title">날짜별 업무</h2>
+            <p className="tactical-copy">업무 기준 날짜를 고르고, 실제 완료 시각은 별도로 기록합니다.</p>
           </div>
           <div className="text-right">
-            <p className="tactical-meta">Selected</p>
+            <p className="tactical-meta">선택일</p>
             <p className="tactical-meta-value">{selectedDate}</p>
           </div>
         </div>
         <div className="mt-4 tactical-stat-grid">
           <div className="tactical-stat">
-            <p className="tactical-stat-label">Routine</p>
+            <p className="tactical-stat-label">정기</p>
             <p className="tactical-stat-value">{data?.routineViews.length ?? 0}</p>
           </div>
           <div className="tactical-stat">
-            <p className="tactical-stat-label">Scenario</p>
+            <p className="tactical-stat-label">상황</p>
             <p className="tactical-stat-value">{data?.scenarioViews.length ?? 0}</p>
           </div>
           <div className="tactical-stat">
-            <p className="tactical-stat-label">Carry</p>
+            <p className="tactical-stat-label">이월</p>
             <p className="tactical-stat-value">{data?.carryOverViews.length ?? 0}</p>
           </div>
         </div>
         <label className="tactical-meta mt-5 block" htmlFor="calendar-date-picker">
-          Selected workload date
+          업무 기준 날짜
         </label>
         <input
           id="calendar-date-picker"
@@ -160,27 +160,27 @@ export function CalendarPage({ database = db, now }: CalendarPageProps) {
           className="tactical-input mt-3"
         />
         <p className="tactical-strip mt-4">
-          Selected date changes which workload is generated. Execution actions still record the live UTC timestamp used when you tap complete, skip, or reschedule.
+          기준 날짜는 업무 생성에만 사용되고, 완료/이슈/재일정 처리 시에는 실제 UTC 시간이 기록됩니다.
         </p>
       </section>
 
       <WorkloadSection
-        title="Routine due on selected date"
-        empty="No routine workload is due on this date."
+        title="선택 날짜 정기 업무"
+        empty="해당 날짜에 정기 업무가 없습니다."
         views={data?.routineViews ?? []}
         onComplete={handleComplete}
         onOpen={openDetail}
       />
       <WorkloadSection
-        title="Active scenario work"
-        empty="No active scenario workload is linked to this date."
+        title="진행 중 상황 업무"
+        empty="해당 날짜에 연결된 상황 업무가 없습니다."
         views={data?.scenarioViews ?? []}
         onComplete={handleComplete}
         onOpen={openDetail}
       />
       <WorkloadSection
-        title="Carry-over work"
-        empty="No open carry-over items are rolling into this date."
+        title="이월 업무"
+        empty="이 날짜로 넘어오는 이월 업무가 없습니다."
         views={data?.carryOverViews ?? []}
         onComplete={handleComplete}
         onOpen={openDetail}

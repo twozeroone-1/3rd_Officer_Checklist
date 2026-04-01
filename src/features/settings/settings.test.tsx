@@ -18,7 +18,7 @@ describe('SettingsPage', () => {
 
     const view = render(<SettingsPage database={database} />);
 
-    fireEvent.click(await screen.findByLabelText(/true-black night/i));
+    fireEvent.click(await screen.findByLabelText(/트루블랙 야간/i));
 
     await waitFor(() => {
       expect(localStorage.getItem(THEME_STORAGE_KEY)).toBe('night');
@@ -40,7 +40,7 @@ describe('SettingsPage', () => {
 
     const view = render(<BackupRestoreSection database={database} />);
 
-    fireEvent.change(await screen.findByLabelText(/import backup json/i), {
+    fireEvent.change(await screen.findByLabelText(/백업 json 가져오기/i), {
       target: {
         files: [new File([JSON.stringify(exportedEnvelope)], 'theme-backup.json', { type: 'application/json' })],
       },
@@ -90,7 +90,7 @@ describe('BackupRestoreSection', () => {
 
     const view = render(<BackupRestoreSection database={database} />);
 
-    fireEvent.click(await screen.findByRole('button', { name: /export backup json/i }));
+    fireEvent.click(await screen.findByRole('button', { name: /백업 json 내보내기/i }));
 
     await waitFor(() => {
       expect(exportedBlob).not.toBeNull();
@@ -100,7 +100,7 @@ describe('BackupRestoreSection', () => {
     expect(exportedEnvelope.payload.linkedNotes.map((note) => note.title)).toContain('Anchoring note');
     await database.linkedNotes.clear();
 
-    fireEvent.change(screen.getByLabelText(/import backup json/i), {
+    fireEvent.change(screen.getByLabelText(/백업 json 가져오기/i), {
       target: {
         files: [new File([JSON.stringify(exportedEnvelope)], 'backup.json', { type: 'application/json' })],
       },
@@ -123,13 +123,13 @@ describe('BackupRestoreSection', () => {
 
     const view = render(<BackupRestoreSection database={database} />);
 
-    fireEvent.change(await screen.findByLabelText(/import backup json/i), {
+    fireEvent.change(await screen.findByLabelText(/백업 json 가져오기/i), {
       target: {
         files: [new File(['not valid json'], 'invalid.json', { type: 'application/json' })],
       },
     });
 
-    expect(await screen.findByRole('status')).toHaveTextContent(/unable to import backup/i);
+    expect(await screen.findByRole('status')).toHaveTextContent(/백업을 가져올 수 없습니다/i);
 
     view.unmount();
     await database.delete();
@@ -142,18 +142,18 @@ describe('BackupRestoreSection', () => {
 
     const view = render(<BackupRestoreSection database={database} />);
 
-    fireEvent.change(await screen.findByLabelText(/import backup json/i), {
+    fireEvent.change(await screen.findByLabelText(/백업 json 가져오기/i), {
       target: {
         files: [new File([JSON.stringify(invalidEnvelope)], 'schema-error.json', { type: 'application/json' })],
       },
     });
 
-    expect(await screen.findByRole('status')).toHaveTextContent(/unable to import backup/i);
+    expect(await screen.findByRole('status')).toHaveTextContent(/백업을 가져올 수 없습니다/i);
 
     const restoreSpy = vi.spyOn(database.manuals, 'clear').mockRejectedValueOnce(new Error('disk full'));
     const validEnvelope = await exportDatabaseBackup(database);
 
-    fireEvent.change(screen.getByLabelText(/import backup json/i), {
+    fireEvent.change(screen.getByLabelText(/백업 json 가져오기/i), {
       target: {
         files: [new File([JSON.stringify(validEnvelope)], 'db-error.json', { type: 'application/json' })],
       },

@@ -23,9 +23,9 @@ describe('HomePage', () => {
 
     expect(await screen.findByText(/prepare for watch handover/i)).toBeInTheDocument();
 
-    fireEvent.click(screen.getByRole('button', { name: /complete prepare for watch handover/i }));
+    fireEvent.click(screen.getByRole('button', { name: /prepare for watch handover.*완료/i }));
 
-    await screen.findByText(/recent completions/i);
+    await screen.findByText(/최근 완료 기록/i);
 
     await waitFor(async () => {
       const item = await database.executionItems.get('routine:watch-handover-prep:2026-04-01');
@@ -52,9 +52,9 @@ describe('HomePage', () => {
       />,
     );
 
-    fireEvent.click(await screen.findByRole('button', { name: /open details for check navigational equipment readiness/i }));
-    fireEvent.change(await screen.findByLabelText(/issue note/i), { target: { value: 'Radar repetition erratic.' } });
-    fireEvent.click(screen.getByRole('button', { name: /mark issue/i }));
+    fireEvent.click(await screen.findByRole('button', { name: /check navigational equipment readiness.*상세/i }));
+    fireEvent.change(await screen.findByLabelText(/이슈 메모/i), { target: { value: 'Radar repetition erratic.' } });
+    fireEvent.click(screen.getByRole('button', { name: /이슈 등록/i }));
 
     await waitFor(async () => {
       const item = await database.executionItems.get('routine:navigational-equipment-checks:2026-04-01');
@@ -62,7 +62,7 @@ describe('HomePage', () => {
       expect(item?.note).toBe('Radar repetition erratic.');
     });
 
-    expect(screen.getByText(/carried-over issues/i)).toBeInTheDocument();
+    expect(screen.getByText(/이월 이슈/i)).toBeInTheDocument();
 
     view.unmount();
     await database.delete();
@@ -84,7 +84,7 @@ describe('HomePage', () => {
     expect(await screen.findByText(/prepare for watch handover/i)).toBeInTheDocument();
 
     now = '2026-04-01T09:45:00.000Z';
-    fireEvent.click(screen.getByRole('button', { name: /complete prepare for watch handover/i }));
+    fireEvent.click(screen.getByRole('button', { name: /prepare for watch handover.*완료/i }));
 
     await waitFor(async () => {
       const item = await database.executionItems.get('routine:watch-handover-prep:2026-04-01');
@@ -107,7 +107,7 @@ describe('HomePage', () => {
       />,
     );
 
-    fireEvent.click(screen.getByRole('button', { name: /anchoring/i }));
+    fireEvent.click(screen.getByRole('button', { name: /투묘/i }));
 
     await waitFor(async () => {
       const sessions = await database.scenarioSessions.toArray();

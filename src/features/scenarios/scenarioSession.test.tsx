@@ -39,9 +39,9 @@ describe('scenario flows', () => {
 
     const view = renderScenarioApp(database);
 
-    fireEvent.click(await screen.findByRole('button', { name: /start anchoring session/i }));
+    fireEvent.click(await screen.findByRole('button', { name: /투묘 세션 시작/i }));
 
-    expect(await screen.findByRole('heading', { name: /anchoring session/i })).toBeInTheDocument();
+    expect(await screen.findByRole('heading', { name: /투묘 세션/i })).toBeInTheDocument();
     expect(await screen.findByText(/run anchoring preparation/i)).toBeInTheDocument();
     expect(await screen.findByText(/record hourly anchor position check/i)).toBeInTheDocument();
 
@@ -90,9 +90,10 @@ describe('scenario flows', () => {
 
     const view = render(<RouterProvider router={router} />);
 
-    expect(await screen.findByText(/active sessions/i)).toBeInTheDocument();
-    fireEvent.click(screen.getByRole('link', { name: /open arrival session/i }));
-    fireEvent.click(await screen.findByRole('button', { name: /complete and close session/i }));
+    expect(await screen.findByText(/진행 중 세션/i)).toBeInTheDocument();
+    await screen.findByText(/시작 2026-04-01 08:00 UTC/i);
+    fireEvent.click(screen.getByRole('link', { name: /입항 세션 열기/i }));
+    fireEvent.click(await screen.findByRole('button', { name: /세션 종료 및 완료/i }));
 
     await waitFor(async () => {
       const session = await database.scenarioSessions.get('session-arrival');

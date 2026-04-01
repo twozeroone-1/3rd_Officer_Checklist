@@ -96,12 +96,12 @@ export async function restoreDatabaseBackup(database: ThirdOfficerDatabase, inpu
 
 export function getBackupImportErrorMessage(error: unknown) {
   if (error instanceof SyntaxError) {
-    return 'Unable to import backup. The selected file is not valid JSON.';
+    return '백업을 가져올 수 없습니다. 선택한 파일이 올바른 JSON이 아닙니다.';
   }
 
   if (error instanceof Error) {
-    return `Unable to import backup. ${error.message}`;
+    return `백업을 가져올 수 없습니다. ${error.message}`;
   }
 
-  return 'Unable to import backup. Unknown error.';
+  return '백업을 가져올 수 없습니다. 알 수 없는 오류입니다.';
 }

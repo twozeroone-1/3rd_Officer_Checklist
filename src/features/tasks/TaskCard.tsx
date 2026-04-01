@@ -6,6 +6,49 @@ type TaskCardProps = {
   onOpen: (view: TaskView) => void;
 };
 
+function getFrequencyLabel(frequency: TaskView['frequency']) {
+  switch (frequency) {
+    case 'watch':
+      return '당직';
+    case 'daily':
+      return '일간';
+    case 'weekly':
+      return '주간';
+    case 'monthly':
+      return '월간';
+    case 'conditional':
+      return '조건부';
+    default:
+      return '상황';
+  }
+}
+
+function getStatusLabel(status: TaskView['item']['status']) {
+  switch (status) {
+    case 'done':
+      return '완료';
+    case 'blocked':
+      return '이슈';
+    case 'skipped':
+      return '제외';
+    case 'in-progress':
+      return '진행';
+    default:
+      return '예정';
+  }
+}
+
+function getResponsibilityLabel(value: string) {
+  switch (value) {
+    case 'third-officer':
+      return '삼항사';
+    case 'bridge-team':
+      return '선교팀';
+    default:
+      return value;
+  }
+}
+
 function getStatusTone(status: TaskView['item']['status']) {
   switch (status) {
     case 'done':
@@ -48,26 +91,27 @@ export function TaskCard({ view, onComplete, onOpen }: TaskCardProps) {
           <div className="flex items-start justify-between gap-3">
             <div className="min-w-0">
               <p className="text-[10px] font-black uppercase tracking-[0.24em] text-[color:var(--accent-secondary)]">{view.frequency}</p>
+              <p className="text-[10px] font-black uppercase tracking-[0.24em] text-[color:var(--accent-secondary)]">{getFrequencyLabel(view.frequency)}</p>
               <h3 className="mt-2 text-lg font-black uppercase tracking-tight text-[color:var(--text-primary)]">{view.item.title}</h3>
-              <p className="mt-2 text-sm leading-6 text-[color:var(--text-secondary)]">{view.template?.summary ?? 'Execution item'}</p>
+              <p className="mt-2 text-sm leading-6 text-[color:var(--text-secondary)]">{view.template?.summary ?? '실행 업무'}</p>
             </div>
             <span className={`border px-2 py-1 text-[10px] font-black uppercase tracking-[0.18em] ${statusTone.badge}`}>
-              {view.item.status.replace('-', ' ')}
+              {getStatusLabel(view.item.status)}
             </span>
           </div>
 
           <div className="grid gap-3 text-[11px] uppercase tracking-[0.14em] text-[color:var(--text-faint)] sm:grid-cols-3">
             <div className="border-l-2 border-[color:var(--surface-highest)] pl-3">
-              <p className="font-black">Ref</p>
+              <p className="font-black">근거</p>
               <p className="mt-2 font-mono text-[color:var(--text-primary)]">{trace.documentId} / {trace.sectionRef}</p>
             </div>
             <div className="border-l-2 border-[color:var(--surface-highest)] pl-3">
-              <p className="font-black">Scheduled</p>
+              <p className="font-black">예정</p>
               <p className="mt-2 font-mono text-[color:var(--text-primary)]">{view.item.scheduledFor.slice(0, 16).replace('T', ' ')}</p>
             </div>
             <div className="border-l-2 border-[color:var(--surface-highest)] pl-3">
-              <p className="font-black">Role</p>
-              <p className="mt-2 font-mono text-[color:var(--text-primary)]">{view.item.responsibility.replace('-', ' ')}</p>
+              <p className="font-black">담당</p>
+              <p className="mt-2 font-mono text-[color:var(--text-primary)]">{getResponsibilityLabel(view.item.responsibility)}</p>
             </div>
           </div>
 
@@ -78,17 +122,17 @@ export function TaskCard({ view, onComplete, onOpen }: TaskCardProps) {
           type="button"
           onClick={() => onComplete(view)}
           className="tactical-button-primary"
-          aria-label={`Complete ${view.item.title}`}
+          aria-label={`${view.item.title} 완료`}
         >
-          Complete
+          완료
         </button>
         <button
           type="button"
           onClick={() => onOpen(view)}
           className="tactical-button-ghost"
-          aria-label={`Open details for ${view.item.title}`}
+          aria-label={`${view.item.title} 상세 열기`}
         >
-          Details
+          상세
         </button>
           </div>
         </div>

@@ -16,18 +16,18 @@ describe('NotesPage', () => {
 
     const view = render(<NotesPage database={database} now={() => now} />);
 
-    fireEvent.change((await screen.findAllByPlaceholderText(/title/i))[0], { target: { value: 'First note' } });
-    fireEvent.change(screen.getByPlaceholderText(/write a free bridge note/i), { target: { value: 'First body' } });
-    fireEvent.click(screen.getByRole('button', { name: /save free note/i }));
+    fireEvent.change((await screen.findAllByPlaceholderText(/제목/i))[0], { target: { value: 'First note' } });
+    fireEvent.change(screen.getByPlaceholderText(/자유 브릿지 메모 입력/i), { target: { value: 'First body' } });
+    fireEvent.click(screen.getByRole('button', { name: /자유 메모 저장/i }));
 
     await waitFor(async () => {
       expect(await database.linkedNotes.count()).toBe(1);
     });
 
     now = '2026-04-01T08:30:01.000Z';
-    fireEvent.change(screen.getAllByPlaceholderText(/title/i)[0], { target: { value: 'Second note' } });
-    fireEvent.change(screen.getByPlaceholderText(/write a free bridge note/i), { target: { value: 'Second body' } });
-    fireEvent.click(screen.getByRole('button', { name: /save free note/i }));
+    fireEvent.change(screen.getAllByPlaceholderText(/제목/i)[0], { target: { value: 'Second note' } });
+    fireEvent.change(screen.getByPlaceholderText(/자유 브릿지 메모 입력/i), { target: { value: 'Second body' } });
+    fireEvent.click(screen.getByRole('button', { name: /자유 메모 저장/i }));
 
     await waitFor(async () => {
       expect(await database.linkedNotes.count()).toBe(2);
@@ -48,15 +48,15 @@ describe('NotesPage', () => {
     const view = render(<NotesPage database={database} now="2026-04-01T08:30:00.000Z" />);
 
     const targetSelect = await screen.findByRole('combobox');
-    const saveLinkedButton = screen.getByRole('button', { name: /save linked note/i });
+    const saveLinkedButton = screen.getByRole('button', { name: /연결 메모 저장/i });
 
     await waitFor(() => {
       expect(targetSelect).not.toHaveValue('');
       expect(saveLinkedButton).toBeEnabled();
     });
 
-    fireEvent.change(screen.getAllByPlaceholderText(/title/i)[1], { target: { value: 'Linked note' } });
-    fireEvent.change(screen.getByPlaceholderText(/write a linked note/i), { target: { value: 'Check radar repeater.' } });
+    fireEvent.change(screen.getAllByPlaceholderText(/제목/i)[1], { target: { value: 'Linked note' } });
+    fireEvent.change(screen.getByPlaceholderText(/업무 연결 메모 입력/i), { target: { value: 'Check radar repeater.' } });
     fireEvent.click(saveLinkedButton);
 
     await waitFor(async () => {

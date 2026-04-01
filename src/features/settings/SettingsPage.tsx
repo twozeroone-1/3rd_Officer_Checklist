@@ -11,8 +11,8 @@ type SettingsPageProps = {
 };
 
 const themeLabels: Record<ThemeChoice, string> = {
-  dark: 'Dark bridge',
-  night: 'True-black night',
+  dark: '브릿지 다크',
+  night: '트루블랙 야간',
 };
 
 export function SettingsPage({ database = db }: SettingsPageProps) {
@@ -31,29 +31,29 @@ export function SettingsPage({ database = db }: SettingsPageProps) {
   return (
     <div className="tactical-page">
       <section className="support-panel">
-        <p className="support-kicker">Settings</p>
-        <h2 className="support-title">Device and offline controls</h2>
-        <p className="support-copy">Keep this page calmer than the operational screens while still matching the tactical palette and typography.</p>
+        <p className="support-kicker">설정</p>
+        <h2 className="support-title">기기 및 오프라인 설정</h2>
+        <p className="support-copy">운영 화면보다 차분하게 유지하되, 전체 앱과 같은 전술형 시각 언어를 공유합니다.</p>
         <div className="mt-4 support-stat-grid">
           <div className="support-stat">
-            <p className="support-stat-label">Theme</p>
+            <p className="support-stat-label">테마</p>
             <p className="support-stat-value">{themeLabels[theme]}</p>
           </div>
           <div className="support-stat">
-            <p className="support-stat-label">Backup</p>
-            <p className="support-stat-value">Ready</p>
+            <p className="support-stat-label">백업</p>
+            <p className="support-stat-value">준비됨</p>
           </div>
           <div className="support-stat">
-            <p className="support-stat-label">Mode</p>
-            <p className="support-stat-value">Offline</p>
+            <p className="support-stat-label">모드</p>
+            <p className="support-stat-value">오프라인</p>
           </div>
         </div>
       </section>
 
       <section className="support-panel space-y-3">
         <div>
-          <p className="support-kicker">Theme</p>
-          <h3 className="mt-2 text-lg font-black text-[color:var(--text-primary)]">Display mode</h3>
+          <p className="support-kicker">테마</p>
+          <h3 className="mt-2 text-lg font-black text-[color:var(--text-primary)]">화면 모드</h3>
         </div>
         <div className="grid gap-3">
           {themeChoices.map((choice) => (
@@ -66,7 +66,7 @@ export function SettingsPage({ database = db }: SettingsPageProps) {
       </section>
 
       <section className="support-panel text-sm text-[color:var(--text-secondary)]">
-        <p className="support-kicker">Reminders</p>
+        <p className="support-kicker">알림</p>
         <h3 className="mt-2 text-lg font-black text-[color:var(--text-primary)]">{reminderPolicy.title}</h3>
         <p className="mt-3 leading-6">{reminderPolicy.detail}</p>
       </section>

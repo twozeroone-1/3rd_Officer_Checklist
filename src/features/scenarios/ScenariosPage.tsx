@@ -59,20 +59,20 @@ export function ScenariosPage({ database = db, now }: ScenariosPageProps) {
   return (
     <div className="tactical-page">
       <section className="tactical-panel-strong">
-        <p className="tactical-kicker">Scenarios</p>
-        <h2 className="tactical-title">Guided bridge modes</h2>
-        <p className="tactical-copy">Start a focused session for arrival, departure, anchoring, or in-port watch work.</p>
+        <p className="tactical-kicker">상황 모드</p>
+        <h2 className="tactical-title">가이드 세션</h2>
+        <p className="tactical-copy">입항, 출항, 투묘, 정박당직을 세션 단위로 바로 시작할 수 있습니다.</p>
         <div className="mt-4 tactical-stat-grid">
           <div className="tactical-stat">
-            <p className="tactical-stat-label">Available</p>
+            <p className="tactical-stat-label">모드</p>
             <p className="tactical-stat-value">{scenarioCatalog.length}</p>
           </div>
           <div className="tactical-stat">
-            <p className="tactical-stat-label">Active</p>
+            <p className="tactical-stat-label">진행</p>
             <p className="tactical-stat-value">{activeSessions.length}</p>
           </div>
           <div className="tactical-stat">
-            <p className="tactical-stat-label">Closed</p>
+            <p className="tactical-stat-label">종료</p>
             <p className="tactical-stat-value">{completedSessions.length}</p>
           </div>
         </div>
@@ -84,39 +84,39 @@ export function ScenariosPage({ database = db, now }: ScenariosPageProps) {
             <p className="tactical-kicker">{scenario.title}</p>
             <p className="mt-3 text-sm leading-6 text-[color:var(--text-secondary)]">{scenario.summary}</p>
             <div className="mt-3 grid gap-2 text-[11px] uppercase tracking-[0.16em] text-[color:var(--text-faint)] sm:grid-cols-2">
-              <div className="border-l-2 border-[color:var(--surface-highest)] pl-3">Context {scenario.contexts.join(' / ')}</div>
-              <div className="border-l-2 border-[color:var(--surface-highest)] pl-3">Ref {scenario.traceability[0]?.documentId}</div>
+              <div className="border-l-2 border-[color:var(--surface-highest)] pl-3">구분 {scenario.contexts.join(' / ')}</div>
+              <div className="border-l-2 border-[color:var(--surface-highest)] pl-3">근거 {scenario.traceability[0]?.documentId}</div>
             </div>
             <button
               type="button"
               onClick={() => void handleStart(scenario.type)}
               className="tactical-button-primary mt-4 w-full"
-              aria-label={`Start ${scenario.title} session`}
+              aria-label={`${scenario.title} 세션 시작`}
             >
-              Start session
+              세션 시작
             </button>
           </article>
         ))}
       </section>
 
       <section className="tactical-list-section">
-        <h3 className="tactical-list-title">Active sessions</h3>
+        <h3 className="tactical-list-title">진행 중 세션</h3>
         {activeSessions.length ? (
           activeSessions.map((session) => (
             <article key={session.id} className="tactical-panel border-l-2 border-[color:var(--accent-secondary)]">
               <p className="tactical-kicker">{formatScenarioTitle(session.scenario)}</p>
-              <p className="mt-3 text-sm text-[color:var(--text-secondary)]">Started {session.startedAt.replace('T', ' ').slice(0, 16)} UTC</p>
+              <p className="mt-3 text-sm text-[color:var(--text-secondary)]">시작 {session.startedAt.replace('T', ' ').slice(0, 16)} UTC</p>
               <Link
                 to={`/scenarios/${session.id}`}
                 className="tactical-button-ghost mt-4 flex items-center justify-center"
-                aria-label={`Open ${formatScenarioTitle(session.scenario)} session`}
+                aria-label={`${formatScenarioTitle(session.scenario)} 세션 열기`}
               >
-                Open session
+                세션 열기
               </Link>
             </article>
           ))
         ) : (
-          <p className="tactical-empty">No active sessions yet.</p>
+          <p className="tactical-empty">진행 중인 세션이 없습니다.</p>
         )}
       </section>
     </div>

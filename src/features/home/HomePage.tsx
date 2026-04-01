@@ -142,61 +142,61 @@ export function HomePage({ database = db, now, initialSelectedDate, onScenarioSt
       <section className="tactical-panel-strong">
         <div className="flex items-start justify-between gap-4">
           <div>
-            <p className="tactical-kicker">Home control</p>
-            <h2 className="tactical-title">Today&apos;s duty board</h2>
-            <p className="tactical-copy">Operational work stays in front. Documents, notes, and settings remain in the same offline command stack.</p>
+            <p className="tactical-kicker">홈 제어판</p>
+            <h2 className="tactical-title">오늘 당직 보드</h2>
+            <p className="tactical-copy">오늘 처리해야 할 업무를 전면에 두고, 문서/메모/설정은 같은 오프라인 흐름 안에서 바로 이어집니다.</p>
           </div>
           <div className="text-right">
-            <p className="tactical-meta">Selected date</p>
+            <p className="tactical-meta">기준 날짜</p>
             <p className="tactical-meta-value">{selectedDate}</p>
           </div>
         </div>
 
         <div className="mt-5 tactical-stat-grid">
           <div className="tactical-stat">
-            <p className="tactical-stat-label">Today</p>
+            <p className="tactical-stat-label">오늘</p>
             <p className="tactical-stat-value">{data?.todayTasks.length ?? 0}</p>
           </div>
           <div className="tactical-stat">
-            <p className="tactical-stat-label">Due</p>
+            <p className="tactical-stat-label">도래</p>
             <p className="tactical-stat-value">{data?.dueTasks.length ?? 0}</p>
           </div>
           <div className="tactical-stat">
-            <p className="tactical-stat-label">Issues</p>
+            <p className="tactical-stat-label">이슈</p>
             <p className="tactical-stat-value">{data?.carriedIssues.length ?? 0}</p>
           </div>
         </div>
 
         <div className="mt-5 grid grid-cols-2 gap-2">
           <button type="button" onClick={() => void handleStartScenario('arrival')} className="tactical-button-primary flex items-center justify-center">
-            Arrival
+            입항
           </button>
           <button type="button" onClick={() => void handleStartScenario('departure')} className="tactical-button-secondary flex items-center justify-center">
-            Departure
+            출항
           </button>
           <button type="button" onClick={() => void handleStartScenario('anchoring')} className="tactical-button-ghost flex items-center justify-center">
-            Anchoring
+            투묘
           </button>
           <button type="button" onClick={() => void handleStartScenario('in-port-watch')} className="tactical-button-ghost flex items-center justify-center">
-            In-Port Watch
+            정박당직
           </button>
         </div>
 
         <div className="mt-4 tactical-inline-links">
-          <a href="/documents" aria-label="Open reference library" className="tactical-inline-link">
-            <strong>Docs</strong> quick reference
+          <a href="/documents" aria-label="문서 빠른 열람 열기" className="tactical-inline-link">
+            <strong>문서</strong> 빠른 열람
           </a>
-          <a href="/notes" aria-label="Open handover log" className="tactical-inline-link">
-            <strong>Notes</strong> handover log
+          <a href="/notes" aria-label="인수인계 메모 열기" className="tactical-inline-link">
+            <strong>메모</strong> 인수인계
           </a>
-          <a href="/settings" aria-label="Open offline control" className="tactical-inline-link">
-            <strong>Settings</strong> offline control
+          <a href="/settings" aria-label="오프라인 설정 열기" className="tactical-inline-link">
+            <strong>설정</strong> 오프라인
           </a>
         </div>
 
         <div className="mt-5">
           <label className="tactical-meta" htmlFor="home-date-picker">
-            Selected date
+            기준 날짜
           </label>
           <input
             id="home-date-picker"
@@ -208,31 +208,31 @@ export function HomePage({ database = db, now, initialSelectedDate, onScenarioSt
         </div>
       </section>
 
-      <PageSection title="Today's tasks">
-        {data?.todayTasks.length ? data.todayTasks.map((view) => <TaskCard key={view.item.id} view={view} onComplete={handleComplete} onOpen={openDetail} />) : <EmptyState label="No open watch or daily tasks for this date." />}
+      <PageSection title="오늘 업무">
+        {data?.todayTasks.length ? data.todayTasks.map((view) => <TaskCard key={view.item.id} view={view} onComplete={handleComplete} onOpen={openDetail} />) : <EmptyState label="해당 날짜에 열려 있는 당직/일간 업무가 없습니다." />}
       </PageSection>
 
-      <PageSection title="Due weekly/monthly tasks">
-        {data?.dueTasks.length ? data.dueTasks.map((view) => <TaskCard key={view.item.id} view={view} onComplete={handleComplete} onOpen={openDetail} />) : <EmptyState label="No weekly or monthly work is due today." />}
+      <PageSection title="도래한 주간/월간 업무">
+        {data?.dueTasks.length ? data.dueTasks.map((view) => <TaskCard key={view.item.id} view={view} onComplete={handleComplete} onOpen={openDetail} />) : <EmptyState label="오늘 도래한 주간/월간 업무가 없습니다." />}
       </PageSection>
 
-      <PageSection title="Carried-over issues">
-        {data?.carriedIssues.length ? data.carriedIssues.map((view) => <TaskCard key={view.item.id} view={view} onComplete={handleComplete} onOpen={openDetail} />) : <EmptyState label="No blocked tasks are carrying over." />}
+      <PageSection title="이월 이슈">
+        {data?.carriedIssues.length ? data.carriedIssues.map((view) => <TaskCard key={view.item.id} view={view} onComplete={handleComplete} onOpen={openDetail} />) : <EmptyState label="이월된 이슈 업무가 없습니다." />}
       </PageSection>
 
-      <PageSection title="Recent completions">
+      <PageSection title="최근 완료 기록">
         {data?.recentCompletions.length ? (
           data.recentCompletions.map(({ log, item }) => (
             <article key={log.id} className="support-panel border-l-2 border-[color:var(--accent-secondary)] text-sm text-[color:var(--text-secondary)]">
-              <p className="support-kicker">Completion log</p>
+              <p className="support-kicker">완료 기록</p>
               <p className="mt-2 text-base font-black uppercase tracking-tight text-[color:var(--text-primary)]">{item?.title ?? log.executionItemId}</p>
               <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.16em] text-[color:var(--accent-secondary)]">
-                Completed {log.recordedAt.replace('T', ' ').slice(0, 16)} UTC
+                완료 {log.recordedAt.replace('T', ' ').slice(0, 16)} UTC
               </p>
             </article>
           ))
         ) : (
-          <EmptyState label="Completions will appear here after the first tap." />
+          <EmptyState label="첫 완료 기록이 생기면 여기에 표시됩니다." />
         )}
       </PageSection>
 

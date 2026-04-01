@@ -46,8 +46,8 @@ describe('TaskDetailSheet', () => {
       />,
     );
 
-    fireEvent.change(screen.getByLabelText(/change date\/time/i), { target: { value: '' } });
-    fireEvent.click(screen.getByRole('button', { name: /save date\/time/i }));
+    fireEvent.change(screen.getByLabelText(/날짜\/시간 변경/i), { target: { value: '' } });
+    fireEvent.click(screen.getByRole('button', { name: /일정 저장/i }));
 
     expect(onReschedule).not.toHaveBeenCalled();
   });

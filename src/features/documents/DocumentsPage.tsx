@@ -18,28 +18,28 @@ export function DocumentsPage({ database = db }: DocumentsPageProps) {
   return (
     <div className="tactical-page">
       <section className="support-panel">
-        <p className="support-kicker">Documents</p>
-        <h2 className="support-title">Manual helper</h2>
-        <p className="support-copy">Search reference text by document code, keyword, or excerpt content without leaving the offline workflow.</p>
+        <p className="support-kicker">문서</p>
+        <h2 className="support-title">매뉴얼 도우미</h2>
+        <p className="support-copy">문서번호, 키워드, 발췌문으로 오프라인 상태에서도 즉시 검색할 수 있습니다.</p>
         <div className="mt-4 support-stat-grid">
           <div className="support-stat">
-            <p className="support-stat-label">Matches</p>
+            <p className="support-stat-label">결과</p>
             <p className="support-stat-value">{results.length}</p>
           </div>
           <div className="support-stat">
-            <p className="support-stat-label">Query</p>
-            <p className="support-stat-value">{query ? 'Live' : 'All'}</p>
+            <p className="support-stat-label">검색</p>
+            <p className="support-stat-value">{query ? '입력중' : '전체'}</p>
           </div>
           <div className="support-stat">
-            <p className="support-stat-label">Mode</p>
-            <p className="support-stat-value">Offline</p>
+            <p className="support-stat-label">모드</p>
+            <p className="support-stat-value">오프라인</p>
           </div>
         </div>
         <input
           type="search"
           value={query}
           onChange={(event) => setQuery(event.target.value)}
-          placeholder="Search by keyword, code, or excerpt"
+          placeholder="문서번호, 키워드, 발췌문 검색"
           className="tactical-input mt-4"
         />
       </section>
@@ -55,7 +55,7 @@ export function DocumentsPage({ database = db }: DocumentsPageProps) {
             </article>
           ))
         ) : (
-          <p className="tactical-empty">No manual results match this search yet.</p>
+          <p className="tactical-empty">검색 조건에 맞는 문서가 없습니다.</p>
         )}
       </section>
     </div>

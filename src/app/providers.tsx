@@ -30,7 +30,7 @@ export function AppProviders({ children }: PropsWithChildren) {
           role="status"
           className="mx-5 mt-4 rounded-2xl border border-amber-400/40 bg-amber-300/10 px-4 py-3 text-sm text-amber-100"
         >
-          Unable to initialize offline storage. {bootstrapError}
+          오프라인 저장소를 초기화할 수 없습니다. {bootstrapError}
         </div>
       ) : null}
       {isReady ? children : null}

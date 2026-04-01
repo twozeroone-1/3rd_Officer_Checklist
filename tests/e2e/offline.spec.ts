@@ -13,11 +13,11 @@ async function waitForServiceWorker(page: Page) {
 
 test('app reloads offline after first online visit and keeps offline data', async ({ page, context }) => {
   await page.goto('/');
-  await page.getByRole('link', { name: /notes/i }).click();
+  await page.getByRole('link', { name: /log 메모/i }).click();
 
-  await page.getByPlaceholder('Title').first().fill('Offline anchor note');
-  await page.getByPlaceholder('Write a free bridge note').fill('Saved before going offline.');
-  await page.getByRole('button', { name: /save free note/i }).click();
+  await page.getByPlaceholder('제목').first().fill('Offline anchor note');
+  await page.getByPlaceholder('자유 브릿지 메모 입력').fill('Saved before going offline.');
+  await page.getByRole('button', { name: /자유 메모 저장/i }).click();
   await expect(page.getByText('Offline anchor note')).toBeVisible();
 
   await page.reload();
@@ -26,6 +26,6 @@ test('app reloads offline after first online visit and keeps offline data', asyn
   await context.setOffline(true);
   await page.reload();
 
-  await expect(page.getByRole('link', { name: /notes/i })).toBeVisible();
+  await expect(page.getByRole('link', { name: /log 메모/i })).toBeVisible();
   await expect(page.getByText('Offline anchor note')).toBeVisible();
 });

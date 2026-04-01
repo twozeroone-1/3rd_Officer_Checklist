@@ -14,6 +14,15 @@ type RoutinePageProps = {
 
 const groups: Array<TaskView['frequency']> = ['watch', 'daily', 'weekly', 'monthly', 'conditional'];
 
+const groupLabels: Record<TaskView['frequency'], string> = {
+  watch: '당직',
+  daily: '일간',
+  weekly: '주간',
+  monthly: '월간',
+  conditional: '조건부',
+  scenario: '상황',
+};
+
 export function RoutinePage({ database = db, now }: RoutinePageProps) {
   const [selectedDate, setSelectedDate] = useState(resolveNow(now).slice(0, 10));
   const [views, setViews] = useState<TaskView[]>([]);
@@ -90,12 +99,12 @@ export function RoutinePage({ database = db, now }: RoutinePageProps) {
       <section className="tactical-panel-strong">
         <div className="flex items-start justify-between gap-4">
           <div>
-            <p className="tactical-kicker">Routine control</p>
-            <h2 className="tactical-title">Checks by frequency</h2>
-            <p className="tactical-copy">Daily, weekly, monthly, and conditional routines stay grouped for fast bridge execution.</p>
+            <p className="tactical-kicker">정기 업무</p>
+            <h2 className="tactical-title">주기별 점검</h2>
+            <p className="tactical-copy">일간, 주간, 월간, 조건부 업무를 주기별로 묶어 빠르게 처리할 수 있습니다.</p>
           </div>
           <div className="text-right">
-            <p className="tactical-meta">Open items</p>
+            <p className="tactical-meta">미완료 항목</p>
             <p className="tactical-meta-value">{views.length}</p>
           </div>
         </div>
@@ -112,13 +121,13 @@ export function RoutinePage({ database = db, now }: RoutinePageProps) {
         return (
           <section key={group} className="tactical-list-section">
             <div className="flex items-center justify-between">
-              <h3 className="tactical-list-title">{group}</h3>
+              <h3 className="tactical-list-title">{groupLabels[group]}</h3>
               <span className="tactical-meta-value">{entries.length}</span>
             </div>
             {entries.length ? (
               entries.map((view) => <TaskCard key={view.item.id} view={view} onComplete={handleComplete} onOpen={openDetail} />)
             ) : (
-              <p className="tactical-empty">No {group} routine items on this date.</p>
+              <p className="tactical-empty">해당 날짜에 {groupLabels[group]} 업무가 없습니다.</p>
             )}
           </section>
         );
